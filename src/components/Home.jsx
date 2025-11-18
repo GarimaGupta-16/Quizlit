@@ -1,3 +1,5 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css'
 import createIcon from "../assets/CreateQuiz.png";
 import joinIcon from "../assets/Join.png";
@@ -5,6 +7,8 @@ import randomIcon from "../assets/Random.png";
 import aiIcon from "../assets/AI_generated.png";
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <div className="home-container">
       <h1 className="main-title">QuizLit</h1>
@@ -15,14 +19,22 @@ export default function Home() {
           <div className="card-icon-wrapper">
             <img src={createIcon} alt="Create Quiz" className="card-icon" />
           </div>
-          <button className="card-button">Create Quiz</button>
+          {/* Added navigation on click */}
+          <button 
+            className="card-button" 
+            onClick={() => navigate('/create-quiz')}
+          >
+            Create Quiz
+          </button>
         </div>
 
         <div className="quiz-card">
           <div className="card-icon-wrapper">
             <img src={joinIcon} alt="Join Quiz" className="card-icon" />
           </div>
-          <button className="card-button">Join Quiz</button>
+          <button className="card-button"
+            onClick={() => navigate('/join-quiz')}
+            >Join Quiz</button>
         </div>
 
         <div className="quiz-card">
