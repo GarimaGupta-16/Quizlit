@@ -1,105 +1,199 @@
-.profile-container {
-  max-width: 900px;
+/* PROFILE PAGE - HORROR & SCALE UPDATE */
+.profile-page {
+  padding: 40px 60px;
+  max-width: 1400px; /* Increased width for bigger cards */
   margin: 0 auto;
-  padding: 2.5rem 1.5rem;
-  text-align: center;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: #102027;
+  overflow-x: hidden; /* Prevents scrollbar during aggressive scaling */
 }
 
-/* Title */
-.profile-title {
-  font-size: 2.5rem;
-  color: #445b6d;
-  margin-bottom: 2rem;
+/* TOP CARD */
+.profile-top-card {
+  display: flex;
+  gap: 40px; /* Increased gap */
+  align-items: center;
+  background: linear-gradient(180deg, #ffffff, #f0f4f8);
+  padding: 40px; /* Bigger padding */
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(16, 32, 48, 0.06);
+  margin-bottom: 50px;
+  transition: all 0.4s ease;
 }
 
-/* Profile Card */
-.profile-card {
-  background: #7a96ab;
-  padding: 2rem;
-  border-radius: 20px;
-  color: #fff;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
-  margin-bottom: 3rem;
-  transition: transform 0.3s ease;
+.profile-top-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
-.profile-card:hover {
-  transform: translateY(-5px) scale(1.02);
-}
-
-/* Avatar */
-.profile-avatar {
-  width: 110px;
-  height: 110px;
-  margin: 0 auto 1rem;
+/* Avatar Styles */
+.avatar-wrapper {
+  width: 180px; /* Larger Avatar */
+  height: 180px;
+  min-width: 180px;
   border-radius: 50%;
-  background: #e5edf3;
-  color: #445b6d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3.5rem;
+  padding: 8px;
+  background: linear-gradient(135deg, #7cc6ff, #bfeaff);
+  box-shadow: 0 15px 35px rgba(89, 160, 255, 0.2);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* Name & Email */
-.profile-name {
-  font-size: 1.8rem;
-  margin-top: 0.5rem;
+.avatar-wrapper:hover {
+  transform: scale(1.1) rotate(-5deg);
+  filter: drop-shadow(0 0 15px rgba(124, 198, 255, 0.8));
 }
 
-.profile-email {
-  font-size: 1rem;
-  opacity: 0.85;
-  margin-bottom: 1.5rem;
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #fff;
+  display: block;
 }
 
-/* Edit Button */
-.edit-btn {
-  background: #e7eef3;
-  border: none;
-  padding: 0.7rem 1.4rem;
-  border-radius: 20px;
-  font-weight: 600;
-  color: #1f2d3a;
+/* USER INFO - Larger Fonts */
+.user-info { flex: 1; }
+.user-name { font-size: 42px; margin: 0; font-weight: 900; color: #0f2b3a; letter-spacing: -1px; }
+.user-handle { font-size: 20px; margin: 8px 0; color: #506672; font-weight: 600; }
+.user-email { font-size: 18px; margin: 4px 0 20px; color: #6f8593; }
+
+/* Action Buttons - Larger */
+.action-row { display: flex; gap: 20px; margin-top: 15px; }
+.edit-btn, .share-btn {
+  padding: 14px 24px;
+  font-size: 16px;
+  border-radius: 14px;
+  font-weight: 700;
   cursor: pointer;
-  display: inline-flex;
-  gap: 0.4rem;
-  align-items: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: all 0.3s;
+}
+.edit-btn { background: #1e6eaa; color: #fff; box-shadow: 0 10px 25px rgba(30, 110, 170, 0.2); }
+.edit-btn:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(30, 110, 170, 0.3); }
+.share-btn { background: transparent; border: 2px solid #dae1e7; color: #0f2b3a; }
+.share-btn:hover { background: #fff; border-color: #0f2b3a; }
+
+/* SECTION HEADING */
+.section-heading {
+  margin: 50px 0 25px;
+  font-size: 28px; /* Much Larger Heading */
+  font-weight: 900;
+  color: #122a36;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.edit-btn:hover {
-  background: #d8e1e8;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+/* --- STATS GRID (HORROR STYLE) --- */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Wider columns */
+  gap: 30px; /* Huge Gap */
 }
 
-/* Stats Grid */
-.stats-grid {
+.stats-card {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  gap: 20px;
+  align-items: center;
+  padding: 30px; /* Larger padding inside card */
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.02);
+  box-shadow: 0 10px 30px rgba(16, 32, 48, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+  position: relative;
+  overflow: hidden;
+}
+
+/* HORROR HOVER EFFECT FOR STATS */
+.stats-card.horror-hover:hover {
+  transform: scale(1.12); /* Aggressive Scaling */
+  z-index: 10;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(255, 0, 0, 0.05); /* Dark/Red shadow */
+  border-color: #ff4d4d; /* Blood red border hint */
+}
+
+.stats-card.horror-hover:hover .stats-icon {
+  animation: ghostFloat 2s ease-in-out infinite;
+  color: #ff4d4d; /* Icon turns red */
+  text-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
+}
+
+.stats-icon { font-size: 52px; color: #2f79b9; transition: color 0.3s; }
+.stats-meta { display: flex; flex-direction: column; }
+.stats-value { font-size: 32px; font-weight: 900; color: #0e2936; line-height: 1.1; }
+.stats-label { font-size: 16px; color: #607784; font-weight: 700; margin-top: 4px; }
+
+/* --- BADGES (SHAKE & GLOW) --- */
+.badge-container {
+  display: flex;
+  gap: 35px; /* Very wide gaps between badges */
   flex-wrap: wrap;
+  margin-top: 15px;
 }
 
-.stat-card {
-  background: #7a96ab;
-  padding: 1.5rem;
-  width: 250px;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
-  color: #fff;
+.badge-card {
+  width: 180px; /* Much Wider */
+  height: 180px; /* Taller */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fff, #f6f9fc);
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(16, 32, 48, 0.08);
+  transition: all 0.3s;
+  border: 2px solid transparent;
 }
 
-.stat-card:hover {
-  transform: translateY(-5px) scale(1.03);
+/* HORROR HOVER EFFECT FOR BADGES */
+.badge-card.horror-shake:hover {
+  animation: nervousShake 0.4s ease-in-out infinite; /* Shaking effect */
+  box-shadow: 0 0 25px rgba(140, 0, 255, 0.3); /* Spectral Purple Glow */
+  border-color: #8a2be2;
+  background: #fff;
+  transform: translateY(-10px) scale(1.05);
 }
 
-.stat-card p {
-  margin-top: 0.6rem;
-  font-size: 1.7rem;
-  font-weight: bold;
+.badge-icon { font-size: 54px; margin-bottom: 12px; display: block; transition: transform 0.3s; }
+.badge-card:hover .badge-icon { transform: scale(1.2); }
+
+.badge-label { font-size: 18px; font-weight: 800; color: #0e2a36; line-height: 1.2; }
+
+/* Color Specifics */
+.gold .badge-icon { color: #ffb703; filter: drop-shadow(0 4px 10px rgba(255, 183, 3, 0.3)); }
+.purple .badge-icon { color: #c77dff; filter: drop-shadow(0 4px 10px rgba(199, 125, 255, 0.3)); }
+.blue .badge-icon { color: #4da8ff; filter: drop-shadow(0 4px 10px rgba(77, 168, 255, 0.3)); }
+.mint .badge-icon { color: #4be1b7; filter: drop-shadow(0 4px 10px rgba(75, 225, 183, 0.3)); }
+
+/* --- KEYFRAME ANIMATIONS --- */
+
+/* 1. Ghost Float (Up and Down eerie motion) */
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-10px); opacity: 0.7; }
 }
 
+/* 2. Nervous Shake (Rapid vibration) */
+@keyframes nervousShake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 900px) {
+  .profile-page { padding: 20px; }
+  .profile-top-card { flex-direction: column; text-align: center; gap: 20px; }
+  .action-row { justify-content: center; }
+  .stats-container { grid-template-columns: 1fr; }
+  .badge-container { justify-content: center; }
+}
