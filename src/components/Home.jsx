@@ -41,7 +41,9 @@ export default function Home() {
           <div className="card-icon-wrapper">
             <img src={randomIcon} alt="Play Random Quiz" className="card-icon" />
           </div>
-          <button className="card-button">Play Random Quiz</button>
+          <button className="card-button"
+          onClick={() => navigate('/random-quiz')}
+          >Play Random Quiz</button>
         </div>
         
       </div>

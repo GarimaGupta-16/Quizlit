@@ -8,7 +8,7 @@ import Profile from "./pages/Profile";
 import Game from "./pages/Game";
 import CreateQuiz from "./pages/CreateQuiz";
 import JoinQuiz from "./pages/JoinQuiz";
-// import RandomQuiz from "./pages/RandomQuiz";
+import RandomQuiz from "./pages/RandomQuiz";
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
@@ -30,7 +30,7 @@ function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/create-quiz" element={<CreateQuiz />} />
           <Route path ="/join-quiz" element={<JoinQuiz />} />
-          {/* <Route path="/random-quiz" element={<RandomQuiz />} /> */}
+          <Route path="/random-quiz" element={<RandomQuiz />} />
         </Routes>
 
       </div>
