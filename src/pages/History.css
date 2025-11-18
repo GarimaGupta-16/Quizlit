@@ -1,148 +1,222 @@
 /* MAIN CONTAINER */
 .history-container {
-  padding: 2.5rem 4rem;
-  max-width: 1300px;
+  padding: 40px 60px;
+  max-width: 1400px;
   margin: 0 auto;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   animation: fadeIn 0.6s ease;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-/* TITLE */
+/* TITLE - Using a darker shade of #7a96ab for readability */
 .history-title {
   text-align: center;
-  font-size: 2.8rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-  color: #2c465c;
-  
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 50px;
+  color: #5e768a; /* Darker version of #7a96ab */
+  letter-spacing: -1px;
+  text-transform: uppercase;
 }
 
-.dark-mode .history-title {
-  color: #e7eef5;
-}
-
-/* GRID — left aligned naturally */
+/* GRID */
 .history-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.8rem;
-  justify-content: flex-start; /* <-- left aligned */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+  justify-content: center;
 }
 
-/* CARD STYLING (More modern, clean, elegant) */
+/* CARD STYLING - BASE */
 .history-card {
-  background: linear-gradient(145deg, #ffffff, #f2f5f7);
-  border-radius: 18px;
-  padding: 1.7rem;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  transition: all 0.25s ease;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  /* Subtle shadow using #7a96ab */
+  box-shadow: 0 10px 30px rgba(122, 150, 171, 0.15);
+    
+  border: 1px solid rgba(122, 150, 171, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
 }
 
-/* Dark mode card */
-.dark-mode .history-card {
-  background: linear-gradient(145deg, #24303d, #1b242d);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+/* HORROR HOVER EFFECT (Ghostly Theme) */
+.history-card.horror-hover:hover {
+  transform: scale(1.08);
+  z-index: 10;
+  /* Spectral Glow using #7a96ab */
+  box-shadow: 0 30px 60px rgba(122, 150, 171, 0.4), inset 0 0 30px rgba(122, 150, 171, 0.1);
+  border-color: #7a96ab; /* The requested color */
 }
 
-/* Glow strip on top */
+/* GLOW STRIP ON TOP */
 .history-card::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  height: 5px;
+  height: 6px;
   width: 100%;
-  background: linear-gradient(90deg, #7aaad8, #9cd4ff);
-  opacity: 0.8;
+  background: linear-gradient(90deg, #d0dee8, #7a96ab); /* Gradient to base color */
+  opacity: 0;
+  transition: height 0.3s;
 }
 
-.dark-mode .history-card::before {
-  background: linear-gradient(90deg, #4d8be2, #8cc2ff);
-}
-
-/* Hover effect */
-.history-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+.history-card:hover::before {
+  height: 8px;
+  background: linear-gradient(90deg, #7a96ab, #54728a); /* Intense version on hover */
 }
 
 /* CARD HEADER */
 .card-header {
   display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
+/* Icon Color set to #7a96ab */
 .quiz-icon {
-  font-size: 34px;
-  color: #3c5972;
+  font-size: 42px;
+  color: #7a96ab; 
+  transition: all 0.4s;
 }
 
-.dark-mode .quiz-icon {
-  color: #9acaff;
+/* Icon Animation on Hover */
+.history-card:hover .quiz-icon {
+  color: #5e768a; /* Darker shade */
+  animation: nervousShake 0.5s ease-in-out infinite;
+  text-shadow: 0 0 15px rgba(122, 150, 171, 0.6); /* Glow */
 }
 
 .card-header h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #4a5f70; /* Dark Slate */
+  margin: 0;
+  line-height: 1.3;
 }
 
 /* DETAILS */
 .card-details p {
-  margin: 0.4rem 0;
-  font-size: 1rem;
-  opacity: 0.9;
+  margin: 8px 0;
+  font-size: 1.1rem;
+  color: #5e768a; /* Using the color for labels */
+  font-weight: 600;
+  opacity: 1;
 }
 
-/* VIEW BUTTON */
+.card-details strong {
+  color: #4a5f70;
+}
+
+/* VIEW BUTTON - Base Color #7a96ab */
 .view-button {
-  margin-top: 1.2rem;
-  padding: 0.55rem 1.3rem;
-  background: #6b8b9c;
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  background: #7a96ab; /* Your requested color */
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.25s ease;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Shadow derived from color */
+  box-shadow: 0 8px 20px rgba(122, 150, 171, 0.3);
 }
 
 .view-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  /* Zoom Effect */
+  transform: translateY(-4px) scale(1.05);
+  background: #688499; /* Slightly darker on hover */
+  box-shadow: 0 15px 30px rgba(122, 150, 171, 0.5); /* Intense shadow */
 }
 
-.dark-mode .view-button {
-  background: #8ec0ff;
-  color: #0e1821;
-}
-
-.dark-mode .view-button:hover {
-  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.15);
+.view-button:active {
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: 0 5px 15px rgba(122, 150, 171, 0.3);
 }
 
 /* EMPTY STATE */
 .empty-history {
-  margin-top: 4rem;
-  opacity: 0.85;
+  text-align: center;
+  margin-top: 80px;
+  opacity: 0.8;
 }
 
 .empty-icon {
-  font-size: 90px;
-  color: #7a8da3;
-  margin-bottom: 1rem;
-}
-
-.dark-mode .empty-icon {
-  color: #a8cfff;
+  font-size: 120px;
+  color: #cfdbe4; /* Very light version of base color */
+  display: block;
+  margin: 0 auto 20px;
 }
 
 /* ANIMATIONS */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes nervousShake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* ========================================================= */
+/* =================== DARK MODE OVERRIDES ================= */
+/* ========================================================= */
+
+.dark-mode .history-container {
+  background-color: #0f1720;
+  color: #e9eef5;
+}
+
+.dark-mode .history-title { color: #a8c0d4; }
+
+/* Card Dark Mode */
+.dark-mode .history-card {
+  background: linear-gradient(145deg, #1f2a34, #182028);
+  border-color: #2c3e50;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Horror Hover Dark Mode - Spectral Blue Glow */
+.dark-mode .history-card.horror-hover:hover {
+  background: #131b21; 
+  /* Glowing Blue Shadow instead of Red */
+  box-shadow: 0 0 35px rgba(122, 150, 171, 0.4); 
+  border-color: #7a96ab;
+}
+
+.dark-mode .history-card::before {
+  background: linear-gradient(90deg, #54728a, #7a96ab);
+}
+
+/* Text & Icons */
+.dark-mode .card-header h3 { color: #e9eef5; }
+.dark-mode .card-details p { color: #8faab9; }
+.dark-mode .card-details strong { color: #e9eef5; }
+.dark-mode .quiz-icon { color: #7a96ab; }
+
+/* Button Dark Mode */
+.dark-mode .view-button {
+  background: #7a96ab;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.dark-mode .view-button:hover {
+  background: #8ca6ba; /* Lighter in dark mode for contrast */
+  box-shadow: 0 0 25px rgba(122, 150, 171, 0.5); /* Glow */
+  transform: translateY(-4px) scale(1.05);
+}
+
+.dark-mode .empty-icon { color: #2c3e50; }

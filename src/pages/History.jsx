@@ -2,27 +2,24 @@ import React from "react";
 import "./History.css";
 
 export default function History() {
-  // Example history entries (replace with real data later) 
+  // Example history entries
   const historyData = [
-  { id: 1, title: "General Knowledge Quiz", score: "8/10", date: "Feb 12, 2025" },
-  { id: 2, title: "Sports Trivia", score: "6/10", date: "Feb 10, 2025" },
-  { id: 3, title: "AI Generated Quiz", score: "9/10", date: "Feb 8, 2025" },
-  { id: 4, title: "Science & Space Quiz", score: "7/10", date: "Feb 5, 2025" },
-  { id: 5, title: "Technology & Coding Basics", score: "10/10", date: "Feb 3, 2025" },
-  { id: 6, title: "World Geography Challenge", score: "5/10", date: "Jan 30, 2025" },
-  { id: 7, title: "Math Speed Test", score: "9/10", date: "Jan 28, 2025" },
-  { id: 8, title: "Movies & Pop Culture", score: "7/10", date: "Jan 24, 2025" },
-  { id: 9, title: "History of India Quiz", score: "8/10", date: "Jan 20, 2025" },
-  { id: 10, title: "Anime Knowledge Test", score: "6/10", date: "Jan 17, 2025" },
-  { id: 11, title: "Logical Reasoning Test", score: "9/10", date: "Jan 12, 2025" },
-  { id: 12, title: "English Vocabulary Quiz", score: "10/10", date: "Jan 10, 2025" },
-  { id: 13, title: "Computer Hardware Basics", score: "8/10", date: "Jan 7, 2025" },
-  { id: 14, title: "Marvel & Superhero Trivia", score: "7/10", date: "Jan 3, 2025" },
-  { id: 15, title: "Aptitude Practice Quiz", score: "6/10", date: "Dec 29, 2024" }
-];
-
-
-  
+    { id: 1, title: "General Knowledge Quiz", score: "8/10", date: "Feb 12, 2025" },
+    { id: 2, title: "Sports Trivia", score: "6/10", date: "Feb 10, 2025" },
+    { id: 3, title: "AI Generated Quiz", score: "9/10", date: "Feb 8, 2025" },
+    { id: 4, title: "Science & Space Quiz", score: "7/10", date: "Feb 5, 2025" },
+    { id: 5, title: "Technology & Coding Basics", score: "10/10", date: "Feb 3, 2025" },
+    { id: 6, title: "World Geography Challenge", score: "5/10", date: "Jan 30, 2025" },
+    { id: 7, title: "Math Speed Test", score: "9/10", date: "Jan 28, 2025" },
+    { id: 8, title: "Movies & Pop Culture", score: "7/10", date: "Jan 24, 2025" },
+    { id: 9, title: "History of India Quiz", score: "8/10", date: "Jan 20, 2025" },
+    { id: 10, title: "Anime Knowledge Test", score: "6/10", date: "Jan 17, 2025" },
+    { id: 11, title: "Logical Reasoning Test", score: "9/10", date: "Jan 12, 2025" },
+    { id: 12, title: "English Vocabulary Quiz", score: "10/10", date: "Jan 10, 2025" },
+    { id: 13, title: "Computer Hardware Basics", score: "8/10", date: "Jan 7, 2025" },
+    { id: 14, title: "Marvel & Superhero Trivia", score: "7/10", date: "Jan 3, 2025" },
+    { id: 15, title: "Aptitude Practice Quiz", score: "6/10", date: "Dec 29, 2024" }
+  ];
 
   return (
     <div className="history-container">
@@ -37,9 +34,11 @@ export default function History() {
       ) : (
         <div className="history-grid">
           {historyData.map((item) => (
-            <div key={item.id} className="history-card">
+            /* Added horror-hover class here */
+            <div key={item.id} className="history-card horror-hover">
               <div className="card-header">
-                <span className="material-symbols-rounded quiz-icon">
+                {/* Added horror-shake class to icon */}
+                <span className="material-symbols-rounded quiz-icon horror-shake">
                   quiz
                 </span>
                 <h3>{item.title}</h3>

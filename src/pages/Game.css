@@ -1,111 +1,219 @@
-.how-container {
-  max-width: 1000px;
+/* MAIN CONTAINER */
+.game-guide-container {
+  padding: 40px 60px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  min-height: 100vh; /* Full screen */
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: #102027;
+  animation: fadeIn 0.8s ease-out;
+  box-sizing: border-box;
+}
+
+/* HEADER SECTION */
+.guide-header {
   text-align: center;
+  margin-bottom: 60px;
 }
 
-/* Titles */
-.how-title {
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #445b6d;
+.guide-title {
+  font-size: 48px;
+  font-weight: 900;
+  color: #5e768a; /* Dark Slate Blue */
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
 }
 
-.how-subtitle {
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
-  color: #5f7182;
-  font-size: 1.1rem;
+.guide-subtitle {
+  font-size: 1.2rem;
+  color: #7a96ab;
+  font-weight: 500;
 }
 
-/* Info Card */
-.info-card {
-  background: #7a96ab;
-  padding: 2rem;
-  border-radius: 18px;
-  color: #ffffff;
-  margin-bottom: 2.5rem;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-6px) scale(1.02);
-}
-
-.info-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-/* Section Titles */
-.section-title {
-  font-size: 1.9rem;
-  margin: 1.5rem 0 1rem;
-  color: #445b6d;
-}
-
-/* Steps Grid */
+/* STEPS GRID */
 .steps-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1.6rem;
-  margin-bottom: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
 }
 
+/* STEP CARD - Horror/Ghostly Style */
 .step-card {
-  background: #7a96ab;
-  padding: 1.6rem;
-  color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
-  transition: all 0.3s ease;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px 30px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(122, 150, 171, 0.2);
+  box-shadow: 0 15px 40px rgba(122, 150, 171, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: center;
+  z-index: 1;
 }
+
+/* HOVER EFFECT: Scale + Spectral Glow */
+.step-card.horror-hover:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 30px 60px rgba(122, 150, 171, 0.4), inset 0 0 30px rgba(122, 150, 171, 0.1);
+  border-color: #7a96ab;
+  z-index: 10;
+}
+
+/* Top Color Strip */
+.step-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #d0dee8, #7a96ab);
+  transition: height 0.3s;
+}
+
+.step-card:hover::before {
+  height: 8px;
+  background: linear-gradient(90deg, #7a96ab, #54728a);
+}
+
+
 
 .step-card:hover {
-  transform: translateY(-6px) scale(1.03);
+  transform: translateY(-10px) rotate(-10deg);
+  color: rgba(122, 150, 171, 0.15);
+}
+
+/* ICON STYLING */
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #eef4f8, #dfe9f0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(122, 150, 171, 0.15);
+  transition: transform 0.4s;
 }
 
 .step-icon {
-  font-size: 3rem;
-  margin-bottom: 0.6rem;
+  font-size: 40px;
+  color: #7a96ab;
 }
 
-/* Rules Section */
-.rules-card, .tips-card {
+.step-card:hover .icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
   background: #7a96ab;
-  padding: 1.8rem;
-  border-radius: 16px;
-  color: white;
-  text-align: left;
-  margin-bottom: 2rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
 }
 
-.rules-card ul, .tips-card ul {
-  list-style: none;
-  padding: 0;
+.step-card:hover .step-icon {
+  color: #ffffff;
+  animation: nervousShake 0.5s ease-in-out infinite;
 }
 
-.rules-card li, .tips-card li {
-  margin: 0.7rem 0;
-  font-size: 1.1rem;
-  padding-left: 0.5rem;
-  position: relative;
+/* TEXT CONTENT */
+.step-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #4a5f70;
+  margin-bottom: 12px;
 }
 
-.rules-card li::before,
-.tips-card li::before {
-  content: "⭐";
-  position: absolute;
-  left: -1rem;
-  color: #ffef97;
+.step-desc {
+  font-size: 1rem;
+  color: #5e768a;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
-@media (max-width: 600px) {
-  .how-title {
-    font-size: 2.2rem;
-  }
+/* CTA BUTTON AREA */
+.action-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
+.start-game-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 48px;
+  background: #7a96ab;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 50px; /* Pill shape */
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(122, 150, 171, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.start-game-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: #5e768a;
+  box-shadow: 0 20px 50px rgba(122, 150, 171, 0.6);
+}
+
+.start-game-btn:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nervousShake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  25% { transform: translate(-2px, 0px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  75% { transform: translate(2px, 1px) rotate(0deg); }
+  100% { transform: translate(1px, -1px) rotate(0deg); }
+}
+
+/* DARK MODE */
+.dark-mode .game-guide-container {
+  background-color: #0f1720;
+}
+
+.dark-mode .guide-title { color: #a8c0d4; }
+.dark-mode .guide-subtitle { color: #7a96ab; }
+
+.dark-mode .step-card {
+  background: linear-gradient(145deg, #1f2a34, #182028);
+  border-color: #2c3e50;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .step-card:hover {
+  background: #131b21;
+  box-shadow: 0 0 40px rgba(122, 150, 171, 0.3); /* Spectral Blue Glow */
+  border-color: #7a96ab;
+}
+
+.dark-mode .step-number { color: rgba(255, 255, 255, 0.03); }
+.dark-mode .step-title { color: #e9eef5; }
+.dark-mode .step-desc { color: #8faab9; }
+
+.dark-mode .icon-wrapper {
+  background: #2c3e50;
+  box-shadow: none;
+}
+.dark-mode .step-icon { color: #a8c0d4; }
+.dark-mode .step-card:hover .icon-wrapper { background: #7a96ab; }
+.dark-mode .step-card:hover .step-icon { color: #fff; }
+
+.dark-mode .start-game-btn {
+  background: #7a96ab;
+  color: #fff;
+}
+.dark-mode .start-game-btn:hover {
+  background: #a8c0d4;
+  color: #0f1720;
+  box-shadow: 0 0 40px rgba(122, 150, 171, 0.5);
+}

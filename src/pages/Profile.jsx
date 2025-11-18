@@ -1,6 +1,5 @@
 import React from "react";
 import "./Profile.css";
-// Import your avatar image
 import avatarImg from "../assets/avatar.jpg"; 
 
 export default function Profile() {
