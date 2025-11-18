@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* DEFAULT LIGHT MODE */
+body {
+  background-color: #f4f6f8;
+  color: #1f2d3a;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* FULL PAGE DARK MODE */
+.dark-mode {
+  background-color: #1a222b !important;
+  color: #e9eef5 !important;
+}
+
+.dark-mode body {
+  background-color: #1a222b !important;
+  color: #e9eef5 !important;
+}

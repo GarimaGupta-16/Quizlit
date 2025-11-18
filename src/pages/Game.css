@@ -1,0 +1,111 @@
+.how-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+/* Titles */
+.how-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #445b6d;
+}
+
+.how-subtitle {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  color: #5f7182;
+  font-size: 1.1rem;
+}
+
+/* Info Card */
+.info-card {
+  background: #7a96ab;
+  padding: 2rem;
+  border-radius: 18px;
+  color: #ffffff;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.info-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.9rem;
+  margin: 1.5rem 0 1rem;
+  color: #445b6d;
+}
+
+/* Steps Grid */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.step-card {
+  background: #7a96ab;
+  padding: 1.6rem;
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+  transition: all 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+.step-icon {
+  font-size: 3rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Rules Section */
+.rules-card, .tips-card {
+  background: #7a96ab;
+  padding: 1.8rem;
+  border-radius: 16px;
+  color: white;
+  text-align: left;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
+
+.rules-card ul, .tips-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rules-card li, .tips-card li {
+  margin: 0.7rem 0;
+  font-size: 1.1rem;
+  padding-left: 0.5rem;
+  position: relative;
+}
+
+.rules-card li::before,
+.tips-card li::before {
+  content: "⭐";
+  position: absolute;
+  left: -1rem;
+  color: #ffef97;
+}
+
+@media (max-width: 600px) {
+  .how-title {
+    font-size: 2.2rem;
+  }
+}
+
