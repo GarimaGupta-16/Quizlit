@@ -39,7 +39,7 @@
   transform: translateY(-8px);
   box-shadow: 0 30px 60px rgba(53, 111, 163, 0.15);
   border-color: rgba(53, 111, 163, 0.3);
-  scale: 1.23;
+  scale: 1.03;
 }
 
 /* Top colored accent line */
@@ -396,7 +396,7 @@
 .dark-mode .quiz-config-card:hover {
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
     border-color: #356fa3;
-    scale: 1.23;
+    scale: 1.03;
 }
 
 .dark-mode .config-title { color: #ffffff; text-shadow: 0 0 20px rgba(53, 111, 163, 0.5); }

@@ -53,7 +53,9 @@ export default function Home() {
           <div className="card-icon-wrapper">
             <img src={aiIcon} alt="AI Quiz" className="card-icon" />
           </div>
-          <button className="card-button">AI Battle Quiz</button>
+          <button className="card-button"
+           onClick={() => navigate('/ai-quiz')}
+          >Play AI-Gen Quiz</button>
         </div>
       </div>
 
