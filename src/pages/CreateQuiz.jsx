@@ -11,31 +11,29 @@ export default function CreateQuiz() {
   const [lobbyCode, setLobbyCode] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle Form Submission
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsAnimating(true);
     
-    // Simulate API delay for "Generating Portal..."
+ 
     setTimeout(() => {
-      const code = Math.floor(100000 + Math.random() * 900000); // Generate 6-digit code
+      const code = Math.floor(100000 + Math.random() * 900000); 
       setLobbyCode(code);
       setIsAnimating(false);
     }, 1500);
   };
 
-  // Handle Enter Key to "Join"
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (lobbyCode && e.key === "Enter") {
-        // Here you would navigate to the lobby
+     
         alert(`Entering Lobby ${lobbyCode}...`); 
-        // navigate(`/lobby/${lobbyCode}`);
+       
       }
     };
 
@@ -46,7 +44,7 @@ export default function CreateQuiz() {
   return (
     <div className="create-quiz-container">
       {!lobbyCode ? (
-        /* --- FORM SECTION --- */
+    
         <div className={`quiz-config-card ${isAnimating ? "fade-out" : ""}`}>
           <div className="card-header">
             <span className="material-symbols-rounded header-icon horror-shake">
@@ -57,7 +55,7 @@ export default function CreateQuiz() {
           </div>
 
           <form onSubmit={handleSubmit} className="quiz-form">
-            {/* Topic Input */}
+         
             <div className="form-group">
               <label>Topic / Realm</label>
               <div className="input-wrapper">
@@ -75,7 +73,7 @@ export default function CreateQuiz() {
             </div>
 
             <div className="row-group">
-              {/* Time Selection */}
+            
               <div className="form-group">
                 <label>Time per Question</label>
                 <div className="input-wrapper">
@@ -93,7 +91,7 @@ export default function CreateQuiz() {
                 </div>
               </div>
 
-              {/* Number of Questions */}
+          
               <div className="form-group">
                 <label>No. of Questions</label>
                 <div className="input-wrapper">
@@ -118,7 +116,7 @@ export default function CreateQuiz() {
           </form>
         </div>
       ) : (
-        /* --- LOBBY CODE DISPLAY --- */
+      
         <div className="lobby-code-card horror-hover">
           <div className="card-header">
             <span className="material-symbols-rounded header-icon success-icon">

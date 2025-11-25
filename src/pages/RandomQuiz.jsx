@@ -7,9 +7,9 @@ export default function RandomQuiz() {
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [animate, setAnimate] = useState(false); // Controls fade-in/out of card
+  const [animate, setAnimate] = useState(false); 
 
-  // 50-question bank (same as your previous one)
+
   const questionBank = [
    { q: "Capital of India?", options: ["Delhi", "Mumbai", "Kolkata", "Chennai"], answer: "Delhi" },
    { q: "Fastest land animal?", options: ["Cheetah", "Lion", "Horse", "Tiger"], answer: "Cheetah" },
@@ -72,26 +72,26 @@ export default function RandomQuiz() {
     setAnimate(true);
   };
   
-  // Initial load
+
   useEffect(() => {
     startNewQuiz();
   }, []);
 
   const handleSelect = (option) => {
-    // Only allow selection if the quiz is not finished
+
     if (!finished) {
       setSelected(option);
     }
   };
 
   const nextQuestion = () => {
-    if (selected === null) return; // Must select an answer
+    if (selected === null) return; 
 
     if (selected === questions[currentQ].answer) {
       setScore(s => s + 1);
     }
 
-    // Animate exit -> enter
+
     setAnimate(false);
 
     setTimeout(() => {
@@ -117,7 +117,7 @@ export default function RandomQuiz() {
           <h1 className="quiz-title">🎲 Random Knowledge Quiz</h1>
           <p className="subtitle">Question {currentQ + 1} of {questions.length} | Score: {score}</p>
           
-          {/* Progress Bar */}
+        
           <div className="progress-bar-container">
             <div className="progress-bar-fill" style={{ width: `${progressPercent}%` }}></div>
           </div>

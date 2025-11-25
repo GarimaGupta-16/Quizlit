@@ -1,4 +1,4 @@
-/* MAIN CONTAINER */
+
 .history-container {
   padding: 40px 60px;
   max-width: 1400px;
@@ -9,18 +9,18 @@
   box-sizing: border-box;
 }
 
-/* TITLE - Using a darker shade of #7a96ab for readability */
+
 .history-title {
   text-align: center;
   font-size: 42px;
   font-weight: 900;
   margin-bottom: 50px;
-  color: #5e768a; /* Darker version of #7a96ab */
+  color: #5e768a;
   letter-spacing: -1px;
   text-transform: uppercase;
 }
 
-/* GRID */
+
 .history-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -28,12 +28,11 @@
   justify-content: center;
 }
 
-/* CARD STYLING - BASE */
 .history-card {
   background: #ffffff;
   border-radius: 20px;
   padding: 30px;
-  /* Subtle shadow using #7a96ab */
+
   box-shadow: 0 10px 30px rgba(122, 150, 171, 0.15);
     
   border: 1px solid rgba(122, 150, 171, 0.3);
@@ -42,16 +41,15 @@
   overflow: hidden;
 }
 
-/* HORROR HOVER EFFECT (Ghostly Theme) */
+
 .history-card.horror-hover:hover {
   transform: scale(1.08);
   z-index: 10;
-  /* Spectral Glow using #7a96ab */
+ 
   box-shadow: 0 30px 60px rgba(122, 150, 171, 0.4), inset 0 0 30px rgba(122, 150, 171, 0.1);
-  border-color: #7a96ab; /* The requested color */
+  border-color: #7a96ab;
 }
 
-/* GLOW STRIP ON TOP */
 .history-card::before {
   content: "";
   position: absolute;
@@ -59,17 +57,17 @@
   left: 0;
   height: 6px;
   width: 100%;
-  background: linear-gradient(90deg, #d0dee8, #7a96ab); /* Gradient to base color */
+  background: linear-gradient(90deg, #d0dee8, #7a96ab); 
   opacity: 0;
   transition: height 0.3s;
 }
 
 .history-card:hover::before {
   height: 8px;
-  background: linear-gradient(90deg, #7a96ab, #54728a); /* Intense version on hover */
+  background: linear-gradient(90deg, #7a96ab, #54728a); 
 }
 
-/* CARD HEADER */
+
 .card-header {
   display: flex;
   align-items: flex-start;
@@ -77,33 +75,32 @@
   margin-bottom: 20px;
 }
 
-/* Icon Color set to #7a96ab */
+
 .quiz-icon {
   font-size: 42px;
   color: #7a96ab; 
   transition: all 0.4s;
 }
 
-/* Icon Animation on Hover */
+
 .history-card:hover .quiz-icon {
-  color: #5e768a; /* Darker shade */
+  color: #5e768a; 
   animation: nervousShake 0.5s ease-in-out infinite;
-  text-shadow: 0 0 15px rgba(122, 150, 171, 0.6); /* Glow */
+  text-shadow: 0 0 15px rgba(122, 150, 171, 0.6);
 }
 
 .card-header h3 {
   font-size: 1.4rem;
   font-weight: 800;
-  color: #4a5f70; /* Dark Slate */
+  color: #4a5f70; 
   margin: 0;
   line-height: 1.3;
 }
 
-/* DETAILS */
 .card-details p {
   margin: 8px 0;
   font-size: 1.1rem;
-  color: #5e768a; /* Using the color for labels */
+  color: #5e768a;
   font-weight: 600;
   opacity: 1;
 }
@@ -112,12 +109,12 @@
   color: #4a5f70;
 }
 
-/* VIEW BUTTON - Base Color #7a96ab */
+
 .view-button {
   width: 100%;
   margin-top: 25px;
   padding: 14px;
-  background: #7a96ab; /* Your requested color */
+  background: #7a96ab; 
   color: white;
   border: none;
   border-radius: 14px;
@@ -125,15 +122,15 @@
   font-weight: 700;
   font-size: 1rem;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  /* Shadow derived from color */
+
   box-shadow: 0 8px 20px rgba(122, 150, 171, 0.3);
 }
 
 .view-button:hover {
-  /* Zoom Effect */
+
   transform: translateY(-4px) scale(1.05);
-  background: #688499; /* Slightly darker on hover */
-  box-shadow: 0 15px 30px rgba(122, 150, 171, 0.5); /* Intense shadow */
+  background: #688499; 
+  box-shadow: 0 15px 30px rgba(122, 150, 171, 0.5);
 }
 
 .view-button:active {
@@ -141,7 +138,7 @@
   box-shadow: 0 5px 15px rgba(122, 150, 171, 0.3);
 }
 
-/* EMPTY STATE */
+
 .empty-history {
   text-align: center;
   margin-top: 80px;
@@ -150,12 +147,12 @@
 
 .empty-icon {
   font-size: 120px;
-  color: #cfdbe4; /* Very light version of base color */
+  color: #cfdbe4; 
   display: block;
   margin: 0 auto 20px;
 }
 
-/* ANIMATIONS */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -170,9 +167,7 @@
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-/* ========================================================= */
-/* =================== DARK MODE OVERRIDES ================= */
-/* ========================================================= */
+
 
 .dark-mode .history-container {
   background-color: #0f1720;
@@ -181,17 +176,16 @@
 
 .dark-mode .history-title { color: #a8c0d4; }
 
-/* Card Dark Mode */
 .dark-mode .history-card {
   background: linear-gradient(145deg, #1f2a34, #182028);
   border-color: #2c3e50;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Horror Hover Dark Mode - Spectral Blue Glow */
+
 .dark-mode .history-card.horror-hover:hover {
   background: #131b21; 
-  /* Glowing Blue Shadow instead of Red */
+
   box-shadow: 0 0 35px rgba(122, 150, 171, 0.4); 
   border-color: #7a96ab;
 }
@@ -200,13 +194,12 @@
   background: linear-gradient(90deg, #54728a, #7a96ab);
 }
 
-/* Text & Icons */
 .dark-mode .card-header h3 { color: #e9eef5; }
 .dark-mode .card-details p { color: #8faab9; }
 .dark-mode .card-details strong { color: #e9eef5; }
 .dark-mode .quiz-icon { color: #7a96ab; }
 
-/* Button Dark Mode */
+
 .dark-mode .view-button {
   background: #7a96ab;
   color: #fff;
@@ -214,8 +207,8 @@
 }
 
 .dark-mode .view-button:hover {
-  background: #8ca6ba; /* Lighter in dark mode for contrast */
-  box-shadow: 0 0 25px rgba(122, 150, 171, 0.5); /* Glow */
+  background: #8ca6ba;
+  box-shadow: 0 0 25px rgba(122, 150, 171, 0.5); 
   transform: translateY(-4px) scale(1.05);
 }
 

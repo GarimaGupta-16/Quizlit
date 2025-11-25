@@ -19,7 +19,7 @@ export default function Home() {
           <div className="card-icon-wrapper">
             <img src={createIcon} alt="Create Quiz" className="card-icon" />
           </div>
-          {/* Added navigation on click */}
+          
           <button 
             className="card-button" 
             onClick={() => navigate('/create-quiz')}

@@ -7,7 +7,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
   return (
     <nav className="navbar" role="navigation" aria-label="Main navigation">
 
-      {/* LEFT SIDE - LOGO */}
+    
       <div className="navbar-left">
         <Link to="/" className="logo" aria-label="Home">
           <img src={logoImg} alt="QuizLit logo" className="logo-image" />
@@ -15,7 +15,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
         </Link>
       </div>
 
-      {/* RIGHT SIDE - ICONS */}
+     
       <div className="navbar-right">
 
         <Link to="/" className="nav-icon" title="Home">
@@ -34,7 +34,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
           <span className="material-symbols-rounded">sports_esports</span>
         </Link>
 
-        {/* DARK MODE TOGGLE (NOT A LINK ANYMORE) */}
+       
         <button
           className="nav-icon"
           title="Toggle Theme"

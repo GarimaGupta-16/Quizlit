@@ -25,14 +25,12 @@ body {
   min-height: 100vh;
 }
 
-/* DEFAULT LIGHT MODE */
 body {
   background-color: #f4f6f8;
   color: #1f2d3a;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* FULL PAGE DARK MODE */
 .dark-mode {
   background-color: #1a222b !important;
   color: #e9eef5 !important;

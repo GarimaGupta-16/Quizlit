@@ -1,20 +1,20 @@
-/* NAVBAR */
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  background-color: #7895a6; /* screenshot tone */
+  background-color: #7895a6; 
   border-radius: 0 0 12px 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
   position: sticky;
   top: 0;
   z-index: 100;
-  /* ensure navbar doesn't scale the logo image */
+  
   overflow: visible;
 }
 
-/* LEFT: logo */
+
 .navbar-left {
   display: flex;
   align-items: center;
@@ -29,18 +29,18 @@
   text-decoration: none;
 }
 
-/* Constrain the image so it can't flood the navbar */
+
 .logo-image {
   width: 50px;
   height: 50px;
   object-fit: contain;
   display: block;
-  border-radius: 8px; /* subtle rounding */
+  border-radius: 8px; 
   box-shadow: 0 3px 10px rgba(0,0,0,0.12);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* text next to logo */
+
 .logo-text {
   font-size: 2rem;
   font-weight: 700;
@@ -49,7 +49,7 @@
   transition: transform 0.2s ease;
 }
 
-/* optional hover on the logo group */
+
 .logo:hover .logo-image {
   transform: scale(1.06);
   box-shadow: 0 6px 20px rgba(0,0,0,0.20);
@@ -58,14 +58,14 @@
   transform: translateY(-2px);
 }
 
-/* RIGHT: nav icon group */
+
 .navbar-right {
   display: flex;
   gap: 1.1rem;
   align-items: center;
 }
 
-/* ICON BUTTONS (transparent background) */
+
 .nav-icon {
   background: transparent;
   border: none;
@@ -80,12 +80,12 @@
   outline: none;
 }
 
-/* remove ripple / pseudo backgrounds */
+
 .nav-icon::before {
   display: none;
 }
 
-/* icon text (Material Symbols) */
+
 .nav-icon .material-symbols-rounded {
   font-variation-settings: 'wght' 500;
   font-size: 40px;
@@ -94,24 +94,24 @@
   display: inline-block;
 }
 
-/* HOVER: strong scale + yellow glow, no white bg */
+
 .nav-icon:hover {
   transform: translateY(-3px) scale(1.15);
-  color: #facc15; /* yellow */
+  color: #facc15;
   filter: drop-shadow(0 0 8px rgba(250,204,21,0.6));
 }
 
-/* SVG/text inside also scales */
+
 .nav-icon:hover .material-symbols-rounded {
   transform: scale(1.25);
 }
 
-/* ACTIVE press state */
+
 .nav-icon:active {
   transform: scale(1.03);
 }
 
-/* DARK MODE OVERRIDES */
+
 .dark-mode .navbar {
   background-color: #4b5f6d;
 }
@@ -126,10 +126,10 @@
   filter: drop-shadow(0 0 10px rgba(253,224,71,0.85));
 }
 
-/* RESPONSIVE: collapse spacing on small screens */
+
 @media (max-width: 720px) {
   .logo-text {
-    display: none; /* save space for small screens */
+    display: none; 
   }
   .nav-icon .material-symbols-rounded {
     font-size: 22px;
@@ -139,26 +139,26 @@
   }
 }
 
-/* SCALE ANIMATION FOR LOGO GROUP */
+
 .logo {
   transition: transform 0.3s ease;
 }
 
 .logo:hover {
-  transform: scale(1.10); /* full logo + text scaling */
+  transform: scale(1.10); 
 }
 
-/* SCALE FOR LOGO IMAGE */
+
 .logo-image {
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .logo:hover .logo-image {
-  transform: scale(1.18) rotate(2deg);  /* slightly bigger + subtle rotation */
+  transform: scale(1.18) rotate(2deg);  
   box-shadow: 0 6px 22px rgba(0,0,0,0.25);
 }
 
-/* SCALE FOR LOGO TEXT */
+
 .logo-text {
   transition: transform 0.3s ease, text-shadow 0.3s ease;
 }

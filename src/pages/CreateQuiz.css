@@ -1,4 +1,4 @@
-/* MAIN CONTAINER - Dynamic Background */
+
 .create-quiz-container {
   padding: 40px 20px;
   min-height: 100vh;
@@ -10,21 +10,20 @@
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   color: #102027;
   box-sizing: border-box;
-  /* Moving Gradient Background */
-  /* background: linear-gradient(135deg, #f5f7fa, #e4eff9, #dbeafe); */
+
   background-size: 400% 400%;
   animation: bgPan 15s ease infinite;
 }
 
-/* --- CONFIG CARD (FORM) --- */
+
 .quiz-config-card {
-  background: rgba(255, 255, 255, 0.95); /* Slight transparency */
-  backdrop-filter: blur(12px); /* Glass effect */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px); 
   padding: 50px;
   border-radius: 24px;
   width: 100%;
   max-width: 600px;
-  /* Layered Shadow for Depth */
+ 
   box-shadow: 
     0 20px 50px rgba(0, 0, 0, 0.08),
     0 10px 15px rgba(0, 0, 0, 0.03);
@@ -42,7 +41,7 @@
   scale: 1.03;
 }
 
-/* Top colored accent line */
+
 .quiz-config-card::before {
   content: '';
   position: absolute;
@@ -59,7 +58,7 @@
   pointer-events: none;
 }
 
-/* HEADERS */
+
 .card-header {
   text-align: center;
   margin-bottom: 35px;
@@ -70,7 +69,6 @@
   color: #7a96ab;
   margin-bottom: 15px;
   display: inline-block;
-  /* Floating Animation */
   animation: floatIcon 3s ease-in-out infinite;
   filter: drop-shadow(0 10px 15px rgba(122, 150, 171, 0.3));
 }
@@ -91,7 +89,7 @@
   font-weight: 500;
 }
 
-/* FORM ELEMENTS */
+
 .quiz-form {
   display: flex;
   flex-direction: column;
@@ -119,7 +117,7 @@
   color: #356fa3;
 }
 
-/* INPUT WRAPPERS */
+
 .input-wrapper {
   position: relative;
   display: flex;
@@ -144,7 +142,7 @@
 .quiz-form input,
 .quiz-form select {
   width: 100%;
-  padding: 16px 16px 16px 50px; /* Space for icon */
+  padding: 16px 16px 16px 50px;
   font-size: 1.1rem;
   font-family: inherit;
   font-weight: 600;
@@ -158,7 +156,7 @@
   transform-origin: center;
 }
 
-/* Select Arrow Customization */
+
 .quiz-form select {
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%237a96ab%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
@@ -175,19 +173,19 @@
 .quiz-form select:focus {
   background: #fff;
   border-color: #356fa3;
-  /* Glow Ring Effect */
+
   box-shadow: 0 0 0 4px rgba(53, 111, 163, 0.15);
   transform: scale(1.02); 
 }
 
-/* SUBMIT BUTTON */
+
 .generate-btn {
   margin-top: 15px;
   padding: 18px;
   font-size: 1.2rem;
   font-weight: 800;
   color: white;
-  /* Gradient Button */
+  
   background: linear-gradient(135deg, #356fa3, #5a8ab6);
   border: none;
   border-radius: 50px;
@@ -199,7 +197,7 @@
   z-index: 1;
 }
 
-/* Shine Effect on Button */
+
 .generate-btn::after {
   content: "";
   position: absolute;
@@ -219,14 +217,14 @@
 .generate-btn:hover {
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 20px 40px rgba(53, 111, 163, 0.5), 0 0 20px rgba(53, 111, 163, 0.3) inset;
-  letter-spacing: 0.5px; /* Subtle text expand */
+  letter-spacing: 0.5px; 
 }
 
 .generate-btn:active {
   transform: translateY(-2px) scale(0.98);
 }
 
-/* --- LOBBY CODE CARD (RESULT) --- */
+
 .lobby-code-card {
   background: rgba(255, 255, 255, 0.98);
   padding: 60px 50px;
@@ -260,7 +258,7 @@
   filter: drop-shadow(0 5px 15px rgba(53, 111, 163, 0.4));
 }
 
-/* CODE DISPLAY */
+
 .code-display-wrapper {
   margin: 40px 0;
   perspective: 1000px;
@@ -272,7 +270,7 @@
   gap: 12px;
 }
 
-/* Digits Interaction */
+
 .code-digit {
   font-size: 3.5rem;
   font-weight: 900;
@@ -293,7 +291,7 @@
   user-select: all;
 }
 
-/* Bouncy Hover effect for individual digits */
+
 .code-digit:hover {
   transform: translateY(-12px) scale(1.15) rotateZ(3deg);
   border-color: #356fa3;
@@ -303,7 +301,6 @@
   z-index: 10;
 }
 
-/* INSTRUCTION TEXT */
 .instruction-text {
   margin-top: 30px;
   font-size: 1.2rem;
@@ -342,7 +339,7 @@
   opacity: 0.8;
 }
 
-/* ANIMATIONS */
+
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
@@ -379,10 +376,9 @@
   100% { background-position: 0% 50%; }
 }
 
-/* DARK MODE */
+
 .dark-mode .create-quiz-container {
-  /* Dark Gradient Background */
-  /* background: linear-gradient(135deg, #0f1720, #16222e, #1a2b3c, #0f1720); */
+ 
   background-size: 400% 400%;
 }
 
@@ -417,7 +413,6 @@
   box-shadow: 0 0 0 4px rgba(53, 111, 163, 0.3);
 }
 
-/* Dark Mode Code Box */
 .dark-mode .code-digit {
   background: #131b21;
   color: #356fa3;
@@ -455,7 +450,7 @@
   box-shadow: 0 0 40px rgba(53, 111, 163, 0.6);
 }
 
-/* Media Queries */
+
 @media (max-width: 600px) {
   .quiz-config-card { padding: 30px 20px; }
   .row-group { flex-direction: column; gap: 20px; }

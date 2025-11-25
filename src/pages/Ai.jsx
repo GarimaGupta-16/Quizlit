@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Ai.css";
 
-// Helper function to decode HTML entities returned by the OpenTDB API
+
 function decodeHTMLEntities(str) {
     const textarea = document.createElement("textarea");
     textarea.innerHTML = str;
@@ -9,7 +9,7 @@ function decodeHTMLEntities(str) {
 }
 
 export default function Ai() {
-  // form
+  
   const [topic, setTopic] = useState("Science: Computers");
   const [timePerQuestion, setTimePerQuestion] = useState(15);
   const [numQuestions, setNumQuestions] = useState(10);
@@ -31,19 +31,19 @@ export default function Ai() {
     Vehicles: 28,
   });
 
-  // quiz data
+  
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [status, setStatus] = useState("config"); // config | running | finished | review
+  const [status, setStatus] = useState("config"); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // timer
+  
   const [timeLeft, setTimeLeft] = useState(timePerQuestion);
   const timerRef = useRef(null);
 
-  // results
+  
   const [score, setScore] = useState(0);
 
   useEffect(() => setTimeLeft(Number(timePerQuestion)), [timePerQuestion]);
@@ -128,7 +128,7 @@ export default function Ai() {
           ...item.incorrect_answers.map(decodeHTMLEntities),
         ];
 
-        // shuffle
+      
         for (let i = options.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [options[i], options[j]] = [options[j], options[i]];
@@ -208,7 +208,7 @@ export default function Ai() {
 
   return (
     <div className="solo-ai-root">
-      {/* CONFIG SCREEN */}
+      
       {status === "config" && (
         <div className="solo-card config">
           <div className="header">
@@ -278,7 +278,7 @@ export default function Ai() {
         </div>
       )}
 
-      {/* QUIZ SCREEN */}
+      
       {status === "running" && currentQuestion && (
         <div className="solo-card quiz">
           <div className="quiz-header">
@@ -377,7 +377,7 @@ export default function Ai() {
         </div>
       )}
 
-      {/* RESULTS */}
+    
       {status === "finished" && (
         <div className="solo-card results">
           <div className="result-head">
@@ -404,7 +404,7 @@ export default function Ai() {
         </div>
       )}
 
-      {/* REVIEW SCREEN — NEW & IMPROVED */}
+      
       {status === "review" && (
         <div className="solo-card review">
           <div className="review-head">

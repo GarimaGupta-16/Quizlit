@@ -2,7 +2,7 @@ import React from "react";
 import "./History.css";
 
 export default function History() {
-  // Example history entries
+ 
   const historyData = [
     { id: 1, title: "General Knowledge Quiz", score: "8/10", date: "Feb 12, 2025" },
     { id: 2, title: "Sports Trivia", score: "6/10", date: "Feb 10, 2025" },
@@ -34,10 +34,10 @@ export default function History() {
       ) : (
         <div className="history-grid">
           {historyData.map((item) => (
-            /* Added horror-hover class here */
+           
             <div key={item.id} className="history-card horror-hover">
               <div className="card-header">
-                {/* Added horror-shake class to icon */}
+             
                 <span className="material-symbols-rounded quiz-icon horror-shake">
                   quiz
                 </span>

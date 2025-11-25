@@ -17,7 +17,7 @@ function App() {
 
   const toggleDarkMode = () => {
     setDarkMode(prev => !prev);
-    document.body.classList.toggle("dark-mode");  // ⭐ GLOBAL FIX
+    document.body.classList.toggle("dark-mode"); 
   };
 
   return (

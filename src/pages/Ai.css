@@ -7,14 +7,13 @@
   align-items: center;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   box-sizing: border-box;
-  color: #102027; /* light-mode text color */
+  color: #102027; 
   background-size: 400% 400%;
   animation: bgPan 15s ease infinite;
-  /* subtle neutral light background by default */
   background: linear-gradient(135deg, #f5f7fa 0%, #e4eff9 50%, #dbeafe 100%);
 }
 
-/* ---------- GLOBAL CARD (use for all screens) ---------- */
+
 .solo-card {
   background: rgba(255,255,255,0.95);
   backdrop-filter: blur(12px);
@@ -37,7 +36,7 @@ scale:1.01;
     0 30px 70px rgba(0,0,0,0.12),
     0 15px 25px rgba(0,0,0,0.05); border-color: rgba(122,150,171,0.3); }
 
-/* top accent line like CreateQuiz */
+
 .solo-card::before {
   content: '';
   position: absolute;
@@ -45,7 +44,6 @@ scale:1.01;
   background: linear-gradient(90deg, #7a96ab, #356fa3);
 }
 
-/* headers */
 .solo-card .header h1, .solo-card h2 {
   font-size: 32px;
   font-weight: 900;
@@ -56,7 +54,7 @@ scale:1.01;
 }
 .solo-card .sub { color: #5e768a; margin-bottom: 20px; font-weight: 600; }
 
-/* form (config) */
+
 .config-form { display:flex; flex-direction:column; gap:20px; }
 .field .label { display:block; font-weight:700; color:#4a657e; margin-bottom:8px; text-transform:uppercase; font-size:0.85rem; }
 .field select { width:100%; padding:14px 16px; border-radius:14px; background:#f0f6fa; border:2px solid transparent; font-weight:700; }
@@ -65,7 +63,7 @@ scale:1.01;
 .error { color:#f44336; background: rgba(244,67,54,0.08); padding:10px; border-radius:8px; }
 .api-note { color:#7a96ab; font-size:0.85rem; text-align:center; margin-top:8px; }
 
-/* primary button — uses CreateQuiz gradient */
+
 .primary {
   padding:12px 26px; border-radius:50px; border:none; cursor:pointer; font-weight:800;
   background: linear-gradient(135deg,#356fa3,#5a8ab6);
@@ -74,7 +72,7 @@ scale:1.01;
 .primary:disabled { opacity:0.6; cursor:not-allowed; }
 .ghost { background:transparent; border:1px solid rgba(122,150,171,0.25); padding:10px 16px; border-radius:10px; cursor:pointer; }
 
-/* ---------- QUIZ HEADER (topic/progress + timer) ---------- */
+
 .quiz-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
 .meta { display:flex; gap:10px; align-items:center; }
 .topic-pill, .progress-pill {
@@ -88,7 +86,7 @@ scale:1.01;
 .timer-ring.critical .timer-fg { stroke:#f44336; animation:flash 0.5s infinite alternate; }
 .time-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-weight:800; }
 
-/* ---------- QUESTION AREA & OPTIONS ---------- */
+
 .question-area { background: rgba(255,255,255,0.95); padding:22px; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,0.04); }
 .q-head { display:flex; gap:12px; margin-bottom:18px; align-items:flex-start; }
 .q-index { background:#1f3a4d; color:#fff; padding:6px 10px; border-radius:8px; font-weight:800; }
@@ -104,12 +102,11 @@ scale:1.01;
 .opt-letter { width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#fff; color:#1f3a4d; font-weight:800; border:2px solid #1f3a4d; }
 .opt-text { flex:1; text-align:left; }
 
-/* nav-row */
 .nav-row { display:flex; justify-content:space-between; align-items:center; margin-top:18px; }
 .small-actions { display:flex; gap:8px; }
 .skip { background:transparent; border:1px solid rgba(122,150,171,0.18); border-radius:12px; padding:10px 12px; }
 
-/* ---------- RESULTS & REVIEW ---------- */
+
 .results { text-align:center; }
 .score-card { background: rgba(255,255,255,0.95); border-radius:16px; padding:28px; margin:18px 0; border:1px solid rgba(255,255,255,0.8); box-shadow:0 10px 30px rgba(0,0,0,0.05); }
 .score-big { font-size:4rem; font-weight:900; color:#3f51b5; }
@@ -145,18 +142,18 @@ scale:1.01;
   font-weight: 700;
 }
 
-/* ---------- SMALL SCREEN ADJUSTMENTS ---------- */
+
 @media (max-width:760px) {
   .solo-card { padding:20px; }
   .options { grid-template-columns:1fr; }
   .grid-2 { grid-template-columns:1fr; }
 }
 
-/* ---------- ANIMATIONS & KEYFRAMES (from CreateQuiz) ---------- */
+
 @keyframes bgPan { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
 @keyframes flash { from{opacity:1} to{opacity:0.5} }
 
-/* ---------- DARK THEME (applies when body or ancestor has .dark-mode) ---------- */
+
 .dark-mode .solo-ai-root {
   background: linear-gradient(135deg,#0f1720 0%,#16222e 50%,#0f1720 100%);
   color: #e9eef5;
@@ -169,25 +166,25 @@ scale:1.01;
 .dark-mode .field select { background:#131b21; color:#e9eef5; border:2px solid #2c3e50; }
 .dark-mode .question-area { background: linear-gradient(180deg,#0f1418,#0a0f13); box-shadow:0 8px 30px rgba(0,0,0,0.6); }
 .dark-mode .q-text, .dark-mode .q-index { color:#e9eef5; }
-/* keep existing */ .dark-mode .option { background:#131b21; color:#e9eef5; border-color:#2c3e50; }
+ .dark-mode .option { background:#131b21; color:#e9eef5; border-color:#2c3e50; }
 .dark-mode .option.selected { background:#356fa3; color:#fff; box-shadow:0 10px 30px rgba(53,111,163,0.6); }
 .dark-mode .opt-letter { background:#0a0f13; color:#356fa3; border-color:#356fa3; }
 .dark-mode .score-card { background: linear-gradient(145deg,#161e26,#12161a); border-color:#2c3e50; }
 .dark-mode .review-list { background: linear-gradient(180deg,#12161a,#0f1418); }
 .dark-mode .generate-btn { background:#356fa3; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.5); }
 
-/* dark-mode button text fix */
+
 .dark-mode .ghost,
 .dark-mode .skip {
   color: #ffffff !important;
   border-color: rgba(255,255,255,0.25) !important;
 }
 
-/* small polish */
+
 .solo-card .header { margin-bottom:16px; }
 .solo-card .header p.sub { margin-top:6px; }
 
-/* -------------------------- REVIEW SECTION --------------------------- */
+
 
 .review-list {
   display: flex;
@@ -270,4 +267,4 @@ scale:1.01;
 .dark-mode .review-option {
   color: #e9eef5;
 }
-/* End of file */
+

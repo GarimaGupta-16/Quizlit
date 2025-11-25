@@ -11,7 +11,7 @@ export default function Game() {
     },
     {
       id: 2,
-      icon: "swords", // or 'group'
+      icon: "swords",
       title: "Challenge Rivals",
       desc: "Create a room and invite friends, or battle against the AI. Multiplayer chaos awaits.",
     },
@@ -41,7 +41,7 @@ export default function Game() {
       <div className="steps-grid">
         {steps.map((step) => (
           <div key={step.id} className="step-card horror-hover">
-            {/* Giant background number for style */}
+         
             
             
             <div className="icon-wrapper">

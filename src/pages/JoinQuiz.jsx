@@ -9,11 +9,11 @@ export default function JoinQuiz() {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    // Only allow numbers and max 6 digits
+  
     const value = e.target.value.replace(/[^0-9]/g, "");
     if (value.length <= 6) {
       setCode(value);
-      setError(false); // Reset error on type
+      setError(false);
     }
   };
 
@@ -27,10 +27,10 @@ export default function JoinQuiz() {
 
     setIsJoining(true);
 
-    // Simulate API call to join lobby
+  
     setTimeout(() => {
       setIsJoining(false);
-      // navigate(`/lobby/${code}`); // Uncomment when lobby route exists
+    
       alert(`Successfully joined lobby: ${code}`);
     }, 1500);
   };

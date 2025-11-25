@@ -5,7 +5,7 @@ import avatarImg from "../assets/avatar.jpg";
 export default function Profile() {
   return (
     <div className="profile-page">
-      {/* TOP PROFILE CARD */}
+     
       <div className="profile-top-card">
         
         <div className="avatar-wrapper">
@@ -28,7 +28,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* STATS */}
+    
       <h2 className="section-heading">Your Stats</h2>
       <div className="stats-container">
         <div className="stats-card horror-hover">
@@ -64,7 +64,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* BADGES */}
+   
       <h2 className="section-heading">Badges & Achievements</h2>
       <div className="badge-container">
         <div className="badge-card gold horror-shake">

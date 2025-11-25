@@ -1,4 +1,4 @@
-/* PAGE WRAPPER */
+
 .home-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-/* TITLE */
+
 .main-title {
   text-align: center;
   font-size: 3rem;
@@ -19,7 +19,7 @@
   letter-spacing: -0.5px;
 }
 
-/* CARD GRID */
+
 .cards-container {
   display: flex;
   justify-content: center;
@@ -32,24 +32,23 @@
   margin-top: 2rem;
 }
 
-/* CARD — EXACT MATCH FOR YOUR IMAGE */
+
 .quiz-card {
-  background-color: #7a96ab;       /* same bluish-gray */
-  width: 300px;                    /* fixed width */
-  height: 300px;                   /* fixed height (VERY IMPORTANT) */
+  background-color: #7a96ab;       
+  width: 300px;                    
+  height: 300px;                   
   border-radius: 16px;
-  padding: 1.4rem 1.4rem 1.7rem;   /* spacing identical to screenshot */
+  padding: 1.4rem 1.4rem 1.7rem;   
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;  /* keeps everything aligned */
+  justify-content: space-between;  
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* Shine animation */
 .quiz-card::before {
   content: "";
   position: absolute;
@@ -66,13 +65,13 @@
   left: 150%;
 }
 
-/* Card hover effect */
+
 .quiz-card:hover {
   transform: translateY(-8px) scale(1.03);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
 
-/* IMAGE BOX — EXACT SAME AS SCREENSHOT */
+
 
 
 .card-icon-wrapper {
@@ -94,11 +93,11 @@
 }
 
 
-/* ICON — scaled to fit evenly */
+
 .card-icon {
   width: 100%;
   height: 100%;
-  object-fit: contain;     /* makes all images uniform */
+  object-fit: contain;     
   transition: transform 0.3s ease;
 }
 
@@ -106,7 +105,7 @@
   transform: scale(1.10);
 }
 
-/* BUTTON — EXACT MATCH */
+
 .card-button {
   background: #e7eef3;
   color: #1f2d3a;
@@ -120,14 +119,14 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 
-/* Hover on button */
+
 .card-button:hover {
   background: #d8e1e8;
   transform: scale(1.50);
   box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 }
 
-/* FOOTER */
+
 .footer {
   margin-top: auto;
   padding: 2rem 0 1rem;
@@ -137,7 +136,7 @@
   font-size: 1rem;
 }
 
-/* RESPONSIVE */
+
 @media (max-width: 768px) {
   .main-title {
     font-size: 2.2rem;
