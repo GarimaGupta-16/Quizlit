@@ -14,10 +14,14 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",     // Vite local dev
+      "https://quizlit.onrender.com"  // Render production
+    ],
     methods: ["GET", "POST"]
   }
 });
+
 
 const nano = customAlphabet("0123456789", 6);
 const rooms = new Map();

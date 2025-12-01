@@ -2,7 +2,10 @@
 import { createContext, useContext, useRef, useEffect } from "react";
 import { io } from "socket.io-client";
 
-const SERVER = "http://localhost:4000";
+const SERVER =
+  window.location.hostname === "localhost"
+    ? "http://localhost:4000"
+    : "https://quizlit.onrender.com";
 
 const SocketContext = createContext(null);
 
@@ -18,18 +21,18 @@ export function SocketProvider({ children }) {
   useEffect(() => {
     const socket = socketRef.current;
 
-    console.log("Trying to connect to:", SERVER);
+    console.log("Connecting to:", SERVER);
 
     socket.on("connect", () => {
-      console.log("🟢 Socket connected successfully!", socket.id);
+      console.log("🟢 Connected:", socket.id);
     });
 
     socket.on("connect_error", (err) => {
-      console.error("🔴 Socket connection error:", err);
+      console.error("🔴 Connection error:", err);
     });
 
     socket.on("disconnect", (reason) => {
-      console.log("🔴 Socket disconnected:", reason);
+      console.log("🔴 Disconnected:", reason);
     });
 
     return () => {
