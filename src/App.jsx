@@ -10,7 +10,7 @@ import CreateQuiz from "./pages/CreateQuiz";
 import JoinQuiz from "./pages/JoinQuiz";
 import RandomQuiz from "./pages/RandomQuiz";
 import Ai from "./pages/Ai";
-
+import QuizRoom from "./pages/QuizRoom";
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
@@ -21,12 +21,14 @@ function App() {
   };
 
   return (
+    
     <Router>
       <div>
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
         <Routes>
           <Route path="/" element={<Home />} />
+           <Route path="/quizroom/:code" element={<QuizRoom />} />
           <Route path="/history" element={<History />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/game" element={<Game />} />

@@ -1,5 +1,19 @@
-import React, { useEffect, useState } from "react";
+
+
+import React, { useEffect, useRef, useState } from "react";
 import "./RandomQuiz.css";
+
+// -------- UNIVERSAL 3-SECOND SOUND WRAPPER --------
+function playSound(ref) {
+  if (!ref.current) return;
+
+  ref.current.currentTime = 0;
+  ref.current.play().catch(() => {});
+
+  setTimeout(() => {
+    if (ref.current) ref.current.pause();
+  }, 3000);
+}
 
 export default function RandomQuiz() {
   const [questions, setQuestions] = useState([]);
@@ -7,21 +21,26 @@ export default function RandomQuiz() {
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [animate, setAnimate] = useState(false); 
+  const [animate, setAnimate] = useState(false);
 
+  // -------- SOUND REFS --------
+  const clickSound = useRef(new Audio("/sounds/click.wav"));
+  const leaderboardSound = useRef(new Audio("/sounds/correct.mp3"));
+  const nextSound = useRef(new Audio("/sounds/click.wav"));
 
+  // -------- QUESTION BANK --------
   const questionBank = [
-   { q: "Capital of India?", options: ["Delhi", "Mumbai", "Kolkata", "Chennai"], answer: "Delhi" },
-   { q: "Fastest land animal?", options: ["Cheetah", "Lion", "Horse", "Tiger"], answer: "Cheetah" },
-   { q: "Largest planet?", options: ["Jupiter", "Mars", "Venus", "Earth"], answer: "Jupiter" },
-   { q: "Who invented the telephone?", options: ["Bell", "Edison", "Tesla", "Newton"], answer: "Bell" },
-   { q: "National bird of India?", options: ["Peacock", "Sparrow", "Crow", "Eagle"], answer: "Peacock" },
-   { q: "Chemical symbol of water?", options: ["H₂O", "O₂", "CO₂", "N₂"], answer: "H₂O" },
-   { q: "Tallest mountain?", options: ["Everest", "K2", "Kangchenjunga", "Makalu"], answer: "Everest" },
-   { q: "Planet known as Red Planet?", options: ["Mars", "Venus", "Mercury", "Saturn"], answer: "Mars" },
-   { q: "Who wrote Harry Potter?", options: ["J.K. Rowling", "Tolkein", "Shakespeare", "Lewis"], answer: "J.K. Rowling" },
-   { q: "Smallest continent?", options: ["Australia", "Europe", "Asia", "Africa"], answer: "Australia" },
-   { q: "Which gas do plants absorb?", options: ["CO₂", "Oxygen", "Nitrogen", "Hydrogen"], answer: "CO₂" },
+    { q: "Capital of India?", options: ["Delhi", "Mumbai", "Kolkata", "Chennai"], answer: "Delhi" },
+    { q: "Fastest land animal?", options: ["Cheetah", "Lion", "Horse", "Tiger"], answer: "Cheetah" },
+    { q: "Largest planet?", options: ["Jupiter", "Mars", "Venus", "Earth"], answer: "Jupiter" },
+    { q: "Who invented the telephone?", options: ["Bell", "Edison", "Tesla", "Newton"], answer: "Bell" },
+    { q: "National bird of India?", options: ["Peacock", "Sparrow", "Crow", "Eagle"], answer: "Peacock" },
+    { q: "Chemical symbol of water?", options: ["H₂O", "O₂", "CO₂", "N₂"], answer: "H₂O" },
+    { q: "Tallest mountain?", options: ["Everest", "K2", "Kangchenjunga", "Makalu"], answer: "Everest" },
+    { q: "Planet known as Red Planet?", options: ["Mars", "Venus", "Mercury", "Saturn"], answer: "Mars" },  
+    { q: "Who wrote Harry Potter?", options: ["J.K. Rowling", "Tolkein", "Shakespeare", "Lewis"], answer: "J.K. Rowling" },
+    { q: "Smallest continent?", options: ["Australia", "Europe", "Asia", "Africa"], answer: "Australia" },
+       { q: "Which gas do plants absorb?", options: ["CO₂", "Oxygen", "Nitrogen", "Hydrogen"], answer: "CO₂" },
    { q: "Largest ocean?", options: ["Pacific", "Atlantic", "Indian", "Arctic"], answer: "Pacific" },
    { q: "Currency of Japan?", options: ["Yen", "Won", "Dollar", "Euro"], answer: "Yen" },
    { q: "Who painted Mona Lisa?", options: ["Da Vinci", "Picasso", "Van Gogh", "Raphael"], answer: "Da Vinci" },
@@ -60,9 +79,11 @@ export default function RandomQuiz() {
    { q: "Earth is shaped like?", options: ["Sphere", "Cube", "Cone", "Flat"], answer: "Sphere" },
    { q: "Which blood group is universal donor?", options: ["O−", "O+", "AB+", "A−"], answer: "O−" },
    { q: "Which animal is the largest reptile?", options: ["Crocodile", "Lizard", "Snake", "Turtle"], answer: "Crocodile" }
- ];
 
-  const startNewQuiz = () => {
+  ];
+const startNewQuiz = () => {
+    playSound(clickSound);
+
     const shuffled = [...questionBank].sort(() => Math.random() - 0.5);
     setQuestions(shuffled.slice(0, 5));
     setCurrentQ(0);
@@ -71,61 +92,71 @@ export default function RandomQuiz() {
     setFinished(false);
     setAnimate(true);
   };
-  
 
   useEffect(() => {
     startNewQuiz();
   }, []);
 
   const handleSelect = (option) => {
-
     if (!finished) {
+      playSound(clickSound);
       setSelected(option);
     }
   };
 
   const nextQuestion = () => {
-    if (selected === null) return; 
+    if (selected === null) return;
+
+    // 🔵 Play next sound but skip first 1 second
+    playSound(nextSound, 1, 2000); // skip 1 sec, play 6 sec max
 
     if (selected === questions[currentQ].answer) {
-      setScore(s => s + 1);
+      setScore((s) => s + 1);
     }
-
 
     setAnimate(false);
 
     setTimeout(() => {
       if (currentQ + 1 < questions.length) {
-        setCurrentQ(c => c + 1);
+        setCurrentQ((c) => c + 1);
         setSelected(null);
         setAnimate(true);
       } else {
         setFinished(true);
+        playSound(leaderboardSound, 0, 6000); // 🎉 2-sec applause on final screen
       }
     }, 300);
   };
-  
+
   const progressPercent = (currentQ / questions.length) * 100;
 
-  if (questions.length === 0) return <div className="loading-screen">Loading...</div>;
+  if (questions.length === 0)
+    return <div className="loading-screen">Loading...</div>;
 
   return (
     <div className="random-quiz-page">
-
       {!finished ? (
         <>
           <h1 className="quiz-title">🎲 Random Knowledge Quiz</h1>
-          <p className="subtitle">Question {currentQ + 1} of {questions.length} | Score: {score}</p>
-          
-        
+          <p className="subtitle">
+            Question {currentQ + 1} of {questions.length}
+          </p>
+
           <div className="progress-bar-container">
-            <div className="progress-bar-fill" style={{ width: `${progressPercent}%` }}></div>
+            <div
+              className="progress-bar-fill"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
           </div>
 
-          <div className={`question-card single fade-card ${animate ? "fade-in" : "fade-out"}`}>
-            
+          <div
+            className={`question-card single fade-card ${
+              animate ? "fade-in" : "fade-out"
+            }`}
+          >
             <h2 className="question-text">
-              <span className="question-number">{currentQ + 1}.</span> {questions[currentQ].q}
+              <span className="question-number">{currentQ + 1}.</span>{" "}
+              {questions[currentQ].q}
             </h2>
 
             <div className="options-grid">
@@ -133,8 +164,7 @@ export default function RandomQuiz() {
                 <button
                   key={opt}
                   className={`option-btn single-option bounce-on-hover 
-                    ${selected === opt ? "selected" : ""}
-                  `}
+                    ${selected === opt ? "selected" : ""}`}
                   onClick={() => handleSelect(opt)}
                   disabled={selected !== null}
                 >
@@ -145,24 +175,42 @@ export default function RandomQuiz() {
           </div>
 
           <button
-            className={`next-btn ${selected ? "active bounce-on-hover" : ""}`}
+            className={`next-btn ${
+              selected ? "active bounce-on-hover" : ""
+            }`}
             onClick={nextQuestion}
             disabled={selected === null}
           >
-            {currentQ === questions.length - 1 ? "Finish Quiz →" : "Next Question →"}
+            {currentQ === questions.length - 1
+              ? "Finish Quiz →"
+              : "Next Question →"}
           </button>
         </>
       ) : (
         <div className="result-box final pop-in">
-          <span className="material-symbols-rounded trophy-icon">emoji_events</span>
+          <span className="material-symbols-rounded trophy-icon">
+            emoji_events
+          </span>
           <h2>Quiz Complete!</h2>
-          <p className="final-score-text">Final Score: <span className="score-value">{score} / {questions.length}</span></p>
-
-          <p className="result-message">
-            {score === 5 ? "🔥 Perfect! You've mastered the realm." : score >= 3 ? "👏 Great job! Keep improving!" : "💡 Try again — learning never stops!"}
+          <p className="final-score-text">
+            Final Score:{" "}
+            <span className="score-value">
+              {score} / {questions.length}
+            </span>
           </p>
 
-          <button className="restart-btn bounce-on-hover" onClick={startNewQuiz}>
+          <p className="result-message">
+            {score === 5
+              ? "🔥 Perfect! You've mastered the realm."
+              : score >= 3
+              ? "👏 Great job! Keep improving!"
+              : "💡 Try again — learning never stops!"}
+          </p>
+
+          <button
+            className="restart-btn bounce-on-hover"
+            onClick={startNewQuiz}
+          >
             Play Again 🔄
           </button>
         </div>

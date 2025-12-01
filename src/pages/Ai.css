@@ -1,3 +1,8 @@
+/*
+ * =================================================================
+ * REVISED CSS (V7: Final Dark Mode Option Hover Enhancement)
+ * =================================================================
+ */
 
 .solo-ai-root {
   padding: 40px 20px;
@@ -30,11 +35,14 @@
   position: relative;
   overflow: hidden;
 }
-.solo-card:hover { transform: translateY(-6px);
-scale:1.01;
- box-shadow:
-    0 30px 70px rgba(0,0,0,0.12),
-    0 15px 25px rgba(0,0,0,0.05); border-color: rgba(122,150,171,0.3); }
+.solo-card:hover { 
+    transform: translateY(-6px);
+    scale:1.01;
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.12),
+        0 15px 25px rgba(0,0,0,0.05); 
+    border-color: rgba(122,150,171,0.3); 
+}
 
 
 .solo-card::before {
@@ -95,10 +103,29 @@ scale:1.01;
 .options { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
 .option {
   display:flex; align-items:center; gap:10px; padding:14px 16px; border-radius:12px; cursor:pointer; border:1px solid rgba(122,150,171,0.2);
-  background:#f0f4f7; font-weight:700; transition:all 0.25s cubic-bezier(0.25,0.8,0.25,1);
+  background:#f0f4f7; font-weight:700; 
+  transition:all 0.3s cubic-bezier(0.25,0.8,0.25,1); /* Light Mode Transition */
 }
-.option:hover { transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.06); }
-.option.selected { background:#356fa3; color:#fff; border-color:#356fa3; transform:scale(1.02); box-shadow:0 8px 20px rgba(53,111,163,0.25); }
+.option:hover { 
+  transform:translateY(-6px); /* Stronger lift */
+  /* Enhanced Shadow for a more defined pop */
+  box-shadow: 
+    0 12px 25px rgba(53,111,163,0.15),
+    0 0 5px rgba(53,111,163,0.3); /* Subtle blue glow */
+  background: #e6f0f7; /* Slightly lighter on hover */
+}
+.option.selected { 
+  background:#356fa3; 
+  color:#000; 
+  border-color:#356fa3; 
+  transform:scale(1.02); 
+  box-shadow:0 10px 30px rgba(53,111,163,0.4); /* Stronger blue glow for selection */
+}
+/* Ensure the selected option doesn't "hover" when selected */
+.option.selected:hover {
+    transform:scale(1.02);
+    box-shadow:0 10px 30px rgba(53,111,163,0.4);
+}
 .opt-letter { width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#fff; color:#1f3a4d; font-weight:800; border:2px solid #1f3a4d; }
 .opt-text { flex:1; text-align:left; }
 
@@ -166,8 +193,42 @@ scale:1.01;
 .dark-mode .field select { background:#131b21; color:#e9eef5; border:2px solid #2c3e50; }
 .dark-mode .question-area { background: linear-gradient(180deg,#0f1418,#0a0f13); box-shadow:0 8px 30px rgba(0,0,0,0.6); }
 .dark-mode .q-text, .dark-mode .q-index { color:#e9eef5; }
- .dark-mode .option { background:#131b21; color:#e9eef5; border-color:#2c3e50; }
-.dark-mode .option.selected { background:#356fa3; color:#fff; box-shadow:0 10px 30px rgba(53,111,163,0.6); }
+
+
+/* --- DARK MODE OPTION STYLES (ENHANCED) --- */
+.dark-mode .option { 
+    background:#131b21; 
+    color:#e9eef5; 
+    border-color:#2c3e50; 
+}
+
+.dark-mode .option:hover { 
+    /* ENHANCED DARK MODE HOVER EFFECT */
+    transform:translateY(-4px); 
+    /* Stronger shadow for lift + bright blue accent glow */
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.6), 
+        0 0 15px rgba(53,111,163,0.7); 
+    background: #1a242e; /* Subtle background change on hover */
+    border-color: #4a8bc5; /* Light blue accent border */
+}
+
+.dark-mode .option.selected { 
+    background:#356fa3; 
+    color:#fff; 
+    border-color:#356fa3; 
+    transform:scale(1.02);
+    /* Highly visible selected shadow/glow */
+    box-shadow: 0 10px 30px rgba(53,111,163,0.7), 0 0 12px rgba(53,111,163,1); 
+}
+/* Revert hover effect on selected option */
+.dark-mode .option.selected:hover {
+    transform:scale(1.02);
+    box-shadow: 0 10px 30px rgba(53,111,163,0.7), 0 0 12px rgba(53,111,163,1);
+}
+/* --- END DARK MODE OPTION STYLES (ENHANCED) --- */
+
+
 .dark-mode .opt-letter { background:#0a0f13; color:#356fa3; border-color:#356fa3; }
 .dark-mode .score-card { background: linear-gradient(145deg,#161e26,#12161a); border-color:#2c3e50; }
 .dark-mode .review-list { background: linear-gradient(180deg,#12161a,#0f1418); }
@@ -266,5 +327,23 @@ scale:1.01;
 .dark-mode .review-q-text,
 .dark-mode .review-option {
   color: #e9eef5;
+}
+
+.correct {
+  background: #28a745 !important;
+  color: white !important;
+}
+
+.wrong {
+  background: #dc3545 !important;
+  color: white !important;
+}
+
+.result-banner {
+  padding: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
 }
 

@@ -1,80 +1,145 @@
-import React, { useState } from "react";
+// src/components/JoinQuiz.jsx
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSocket } from "../context/SocketContext.jsx";
 import "./JoinQuiz.css";
 
-export default function JoinQuiz() {
-  const [code, setCode] = useState("");
-  const [isJoining, setIsJoining] = useState(false);
-  const [error, setError] = useState(false);
-  const navigate = useNavigate();
+// --- Universal sound function (always 2 sec) ---
+function playSound(ref) {
+  if (!ref.current) return;
+  try {
+    ref.current.currentTime = 0;
+  } catch {}
+  ref.current.play().catch(() => {});
 
-  const handleInputChange = (e) => {
-  
-    const value = e.target.value.replace(/[^0-9]/g, "");
-    if (value.length <= 6) {
-      setCode(value);
-      setError(false);
+  // Force stop after 2 sec
+  setTimeout(() => {
+    try {
+      if (ref.current) ref.current.pause();
+    } catch {}
+  }, 2000);
+}
+
+export default function JoinQuiz() {
+  const navigate = useNavigate();
+  const socket = useSocket();
+
+  // ------------ SOUND REFS ------------
+  const clickSound = useRef(new Audio("/sounds/click.wav"));
+  const nextSound = useRef(new Audio("/sounds/click.wav"));
+  const wrongSound = useRef(new Audio("/sounds/wrong.mp3"));
+
+  // ------------ STATE ------------
+  const [name, setName] = useState("");
+  const [code, setCode] = useState("");
+  const [error, setError] = useState(null);
+
+  // Manual validation helper
+  const validate = () => {
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      playSound(wrongSound);
+      return false;
     }
+    if (!code.trim()) {
+      setError("Please enter a lobby code.");
+      playSound(wrongSound);
+      return false;
+    }
+    setError(null);
+    return true;
   };
 
   const handleJoin = (e) => {
-    e.preventDefault();
+    // Prevent default always — we are handling validation manually
+    if (e && e.preventDefault) e.preventDefault();
 
-    if (code.length !== 6) {
-      setError(true);
+    // Play click sound for the button press
+    playSound(clickSound);
+
+    if (!socket) {
+      setError("Socket not ready");
+      playSound(wrongSound);
       return;
     }
 
-    setIsJoining(true);
+    // Run manual validation (native browser validation disabled)
+    if (!validate()) return;
 
-  
-    setTimeout(() => {
-      setIsJoining(false);
-    
-      alert(`Successfully joined lobby: ${code}`);
-    }, 1500);
+    // Send join request
+    socket.emit(
+      "join_room",
+      { code: code.toUpperCase(), playerName: name.trim() },
+      (res) => {
+        if (res && res.ok) {
+          playSound(nextSound); // entering room → next sound
+          navigate(`/quizroom/${code.toUpperCase()}`, {
+            state: { playerName: name.trim(), isHost: false },
+          });
+        } else {
+          // server error (room not found / full)
+          setError(res?.error || "Room not found or is full.");
+          playSound(wrongSound);
+        }
+      }
+    );
   };
+
+  const shakeClass = error ? " shake-error" : "";
 
   return (
     <div className="join-quiz-container">
-      <div className="join-card">
-        <div className="card-header">
-          <span className="material-symbols-rounded header-icon floating-icon">
-            login
-          </span>
-          <h1 className="join-title">Enter Portal</h1>
-          <p className="join-subtitle">Input the 6-digit code to enter the realm.</p>
-        </div>
+      <div className={`join-card${shakeClass}`}>
+        <div className="header-icon floating-icon">🧠</div>
+        <h1 className="join-title">Join a Quiz</h1>
+        <p className="join-subtitle">Enter the lobby code and your nickname to play.</p>
 
-        <form onSubmit={handleJoin} className="join-form">
-          <div className={`code-input-wrapper ${error ? "shake-error" : ""}`}>
+        {/* IMPORTANT: noValidate prevents browser blocking so we can run our own checks */}
+        <form onSubmit={handleJoin} className="join-form" noValidate>
+          {/* Player Name */}
+          <input
+            className="code-input"
+            placeholder="Enter your name "
+            value={name}
+            onChange={(e) => {
+              playSound(clickSound); // typing/click sound
+              setName(e.target.value);
+              if (error) setError(null);
+            }}
+            aria-label="Player name"
+            style={{ fontSize: "1.4rem", letterSpacing: "2px", padding: "15px" }}
+          />
+
+          {/* Lobby Code */}
+          <div className="code-input-wrapper">
             <input
-              type="text"
-              value={code}
-              onChange={handleInputChange}
-              placeholder="000 000"
               className="code-input"
-              maxLength="6"
-              autoFocus
+              placeholder="000000"
+              value={code}
+              onChange={(e) => {
+                playSound(clickSound); // typing/click sound
+                // keep uppercase and limit to 6 chars
+                setCode(e.target.value.toUpperCase().slice(0, 6));
+                if (error) setError(null);
+              }}
+              aria-label="Lobby code"
+              maxLength={6}
             />
-            <span className="input-focus-border"></span>
           </div>
 
-          {error && <p className="error-msg">Code must be exactly 6 digits.</p>}
+          {/* Error Message */}
+          {error && <p className="error-msg" role="alert">{error}</p>}
 
-          <button 
-            type="submit" 
-            className={`join-btn ${isJoining ? "loading" : ""}`}
-            disabled={isJoining || code.length === 0}
+          {/* Join Button */}
+          <button
+            type="submit"
+            className="join-btn"
+            onClick={(ev) => {
+              /* keep click sound as a responsive immediate feedback (handleJoin also plays) */
+              playSound(clickSound);
+            }}
           >
-            {isJoining ? (
-              <span className="loading-text">Connecting...</span>
-            ) : (
-              <>
-                <span>Join Lobby</span>
-                <span className="material-symbols-rounded btn-icon">arrow_forward</span>
-              </>
-            )}
+            Join Game <span className="btn-icon">🚀</span>
           </button>
         </form>
       </div>

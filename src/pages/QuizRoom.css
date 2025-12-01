@@ -1,0 +1,254 @@
+/*
+ * =================================================================
+ * REVISED QuizRoom.css (V6: Final Dark Mode Leaderboard Text Contrast Fix)
+ * =================================================================
+ */
+
+:root {
+    /* Light Mode Variables */
+    --primary-blue: #356fa3;
+    --secondary-light: #e3f2fd;
+    --accent-red: #ff4500;
+    --correct-green: #38a169;
+    --wrong-red: #e53e3e;
+    --card-bg: #ffffff;
+    --text-dark: #102027; /* Dark text color */
+}
+
+/* --- Dark Mode Variables --- */
+.dark-mode {
+    --primary-blue: #4a8bc5; /* Light accent blue for dark mode */
+    --secondary-light: #2c3e50; 
+    --accent-red: #ff6347;
+    --correct-green: #48bb78;
+    --wrong-red: #f56565;
+    --card-bg: #1f2a34; 
+    --text-dark: #f0f6fa; /* Light text color in dark mode */
+    --podium-text-contrast: #102027; /* New variable for dark text on podiums in dark mode */
+}
+
+/* --- Global Container and Layout --- */
+
+.solo-ai-root {
+    padding: 40px 20px;
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--secondary-light), #f8f9fa);
+}
+
+.dark-mode .solo-ai-root {
+    background: linear-gradient(135deg, #161e26, #10151a);
+}
+
+
+/* --- Card Base Style (Used for Quiz and Leaderboard) --- */
+
+.solo-card,
+.lobby-code-card {
+    background: var(--card-bg);
+    padding: 50px;
+    border-radius: 25px;
+    width: 100%;
+    max-width: 800px; 
+    box-shadow: 0 25px 50px rgba(53, 111, 163, 0.2);
+    animation: fadeIn 0.8s ease-out;
+    margin: 0 auto;
+}
+
+.dark-mode .solo-card,
+.dark-mode .lobby-code-card {
+    background: var(--card-bg); 
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* --- 1. Lobby State Styling (When !question) --- */
+
+.lobby-code-card {
+    max-width: 500px; 
+    text-align: center;
+}
+
+.lobby-code-card h2 {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.lobby-code-card p {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+.dark-mode .lobby-code-card p {
+    color: #9ab;
+}
+
+/* --- 2. Quiz In Progress State Styling (omitted for brevity) --- */
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f4f7;
+    padding-bottom: 20px;
+}
+
+.dark-mode .quiz-header {
+    border-bottom: 2px solid #2c3e50;
+}
+
+.progress-pill {
+    background: var(--primary-blue);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(53, 111, 163, 0.4);
+}
+
+/* --- SVG Timer Ring Design (omitted for brevity) --- */
+.timer-wrap { width: 70px; height: 70px; }
+.timer svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+.timer-bg { fill: none; stroke: #e0e9f0; stroke-width: 4; }
+.timer-fg { fill: none; stroke: var(--primary-blue); stroke-width: 4; transition: stroke-dasharray 0.5s linear, stroke 0.5s; stroke-linecap: round; }
+.timer { position: relative; display: flex; justify-content: center; align-items: center; }
+.time-text { position: absolute; font-size: 1.2rem; font-weight: 800; color: var(--primary-blue); }
+
+.dark-mode .timer-bg { stroke: #3f556b; } 
+
+.timer-wrap:has(.time-text[data-time-low="true"]) .timer-fg,
+.time-text[data-time-low="true"] {
+    stroke: var(--accent-red);
+    color: var(--accent-red);
+}
+
+/* --- Question and Options (omitted for brevity) --- */
+.q-text { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin-bottom: 30px; line-height: 1.4; text-align: center; }
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+.option { padding: 20px; font-size: 1.1rem; font-weight: 600; border: 3px solid #e0e9f0; border-radius: 15px; background: #fdfdfd; cursor: pointer; text-align: center; transition: all 0.3s ease, transform 0.1s; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); }
+.option:hover:not([disabled]) { background: #f0f6fa; border-color: var(--primary-blue); transform: translateY(-2px); }
+.option[disabled] { cursor: default; opacity: 0.9; }
+
+/* Dark Mode Option Styles */
+.dark-mode .option { border-color: #3f556b; background: #2c3e50; color: var(--text-dark); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
+.dark-mode .option:hover:not([disabled]) { background: #3f556b; border-color: var(--primary-blue); }
+
+/* --- Answer Feedback States (omitted for brevity) --- */
+.option.selected { border-color: var(--primary-blue); background: var(--secondary-light); box-shadow: 0 0 0 4px var(--primary-blue); }
+.option.correct { background: var(--correct-green); color: white; border-color: var(--correct-green); font-weight: 800; animation: pulseGlow 1.5s infinite alternate; box-shadow: 0 0 15px rgba(56, 161, 105, 0.8); }
+.option.wrong { background: var(--wrong-red); color: white; border-color: var(--wrong-red); box-shadow: 0 0 10px rgba(229, 62, 62, 0.5); }
+.option.wrong:not(.correct) { opacity: 0.6; }
+.option.wrong.selected { opacity: 1; }
+.result-banner { background: var(--primary-blue); color: white; padding: 12px; border-radius: 10px; margin-bottom: 20px; text-align: center; font-weight: 700; font-size: 1.1rem; animation: slideDown 0.5s ease-out; }
+
+/* Dark Mode Feedback */
+.dark-mode .option.selected { background: #3f556b; border-color: var(--primary-blue); box-shadow: 0 0 0 4px var(--primary-blue); }
+.dark-mode .option.correct { background: var(--correct-green); border-color: var(--correct-green); }
+.dark-mode .option.wrong { background: var(--wrong-red); border-color: var(--wrong-red); }
+
+/* --- 3. Leaderboard/Results State Styling --- */
+
+.results h2 {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 5px 10px rgba(53, 111, 163, 0.2);
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    margin: 10px 0;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    background: #f7f9fb;
+    border-left: 5px solid var(--primary-blue);
+    transition: all 0.3s;
+}
+
+.score-item b { font-weight: 900; color: var(--primary-blue); }
+
+/* Podium Colors */
+/* nth-child(2) is the first score item */
+.score-item:nth-child(2) { 
+    border-left-color: gold; 
+    background: #fff0e1; /* Light yellow background */
+    font-weight: 700; 
+    transform: scale(1.03); 
+}
+
+/* FINAL FIX for Light Mode Score Visibility */
+.score-item:nth-child(2) b {
+    color: var(--text-dark); /* Ensures DARK contrast against the light yellow background */
+}
+
+
+.score-item:nth-child(3) { border-left-color: silver; background: #f0f4f7; }
+.score-item:nth-child(4) { border-left-color: #cd7f32; background: #f5f0eb; }
+
+/* Dark Mode Leaderboard Styles */
+
+/* FIX 3: Set default text color for all items in dark mode to ensure contrast */
+.dark-mode .score-item { 
+    background: #2c3e50; 
+    border-left: 5px solid var(--primary-blue); 
+    color: var(--text-dark); /* Default player name text color (light) */
+}
+
+/* FIX 3: General score color in dark mode */
+.dark-mode .score-item b { 
+    color: var(--primary-blue); /* Light accent blue for score */
+}
+
+
+/* Dark mode first place podium */
+.dark-mode .score-item:nth-child(2) { 
+    background: #3f556b; 
+    border-left-color: gold; 
+    /* FIX 3: Explicitly set text color for contrast if the background is light */
+    color: var(--podium-text-contrast); /* Use the defined dark color */
+}
+
+/* Ensure contrast for the first place score in Dark Mode */
+.dark-mode .score-item:nth-child(2) b {
+    color: var(--podium-text-contrast); /* Use the defined dark color */
+}
+
+/* Dark mode second place podium */
+.dark-mode .score-item:nth-child(3) { 
+    background: #364a5c; 
+    border-left-color: silver;
+    color: var(--podium-text-contrast); /* Use the defined dark color */
+}
+
+/* Dark mode third place podium */
+.dark-mode .score-item:nth-child(4) { 
+    background: #364a5c; 
+    border-left-color: #cd7f32;
+    color: var(--podium-text-contrast); /* Use the defined dark color */
+}
+
+/* Ensure scores in 2nd and 3rd are also dark for contrast */
+.dark-mode .score-item:nth-child(3) b,
+.dark-mode .score-item:nth-child(4) b {
+    color: var(--podium-text-contrast);
+}
+
+
+/* --- Keyframes (omitted for brevity) --- */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 15px rgba(56, 161, 105, 0.8); } 100% { box-shadow: 0 0 25px rgba(56, 161, 105, 1); } }

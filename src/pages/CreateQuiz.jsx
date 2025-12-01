@@ -1,148 +1,200 @@
-import React, { useState, useEffect } from "react";
+// src/components/CreateQuiz.jsx
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSocket } from "../context/SocketContext.jsx";
 import "./CreateQuiz.css";
 
 export default function CreateQuiz() {
+  const socket = useSocket();
+  const navigate = useNavigate();
+
+  // ----------- SOUND REFS -----------
+  const applause = useRef(new Audio("/sounds/correct.mp3"));
+  const nextSound = useRef(new Audio("/sounds/click.wav"));
+  const wrongSound = useRef(new Audio("/sounds/wrong.mp3"));
+  const clickSound = useRef(new Audio("/sounds/click.wav"));
+
+  // ---- Universal 2-sec sound player ----
+  const play2Sec = (ref) => {
+    const audio = ref.current;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+
+    setTimeout(() => {
+      audio.pause();
+      audio.currentTime = 0;
+    }, 2000);
+  };
+
+  // ---- state ----
   const [formData, setFormData] = useState({
+    playerName: "Host",
     topic: "",
     timePerQuestion: "15",
-    numQuestions: "10",
+    numQuestions: "5"
   });
 
+  const topics = [
+    "General Knowledge",
+    "Science: Computers",
+    "Science & Nature",
+    "Sports",
+    "History",
+    "Geography",
+    "Politics",
+    "Art",
+    "Animals",
+    "Vehicles",
+    "Maths"
+  ];
+
+  const [players, setPlayers] = useState([]);
   const [lobbyCode, setLobbyCode] = useState(null);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // ----------- Player joined ---> applause 2 sec -----------
+  useEffect(() => {
+    if (!socket) return;
 
+    socket.on("room_update", ({ players }) => {
+      setPlayers(players);
+      play2Sec(applause);
+    });
 
+    return () => socket.off("room_update");
+  }, [socket]);
+
+  // ----------- Form Submit -----------
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsAnimating(true);
-    
- 
-    setTimeout(() => {
-      const code = Math.floor(100000 + Math.random() * 900000); 
-      setLobbyCode(code);
-      setIsAnimating(false);
-    }, 1500);
+
+    // EMPTY VALIDATION
+    if (!formData.playerName.trim()) {
+      play2Sec(wrongSound);
+      alert("Please enter your name.");
+      return;
+    }
+    if (!formData.topic.trim()) {
+      play2Sec(wrongSound);
+      alert("Please select a topic.");
+      return;
+    }
+
+    // Emit socket event
+    socket.emit(
+      "create_room",
+      { settings: formData, playerName: formData.playerName },
+      (res) => {
+        if (!res.ok) {
+          play2Sec(wrongSound);
+          return alert(res.error);
+        }
+
+        setLobbyCode(res.code);
+        setWaiting(true);
+        play2Sec(nextSound);
+      }
+    );
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (lobbyCode && e.key === "Enter") {
-     
-        alert(`Entering Lobby ${lobbyCode}...`); 
-       
-      }
-    };
+  // ----------- Start quiz on ANY key press -----------
+  const startOnKey = useCallback(() => {
+    if (!waiting || !lobbyCode) return;
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lobbyCode]);
+    window.removeEventListener("keydown", startOnKey);
+    play2Sec(nextSound);
+
+    navigate(`/quizroom/${lobbyCode}`, {
+      state: { playerName: formData.playerName, isHost: true }
+    });
+
+    socket.emit("start_quiz", { code: lobbyCode });
+  }, [waiting, lobbyCode]);
+
+  useEffect(() => {
+    if (waiting) window.addEventListener("keydown", startOnKey);
+    return () => window.removeEventListener("keydown", startOnKey);
+  }, [waiting, startOnKey]);
+
+
+  // ------------- HANDLE INPUT CHANGE WITH CLICK SOUND + TYPING SOUND -------------
+  const handleInput = (key, value) => {
+    play2Sec(clickSound);
+    setFormData({ ...formData, [key]: value });
+  };
 
   return (
     <div className="create-quiz-container">
       {!lobbyCode ? (
-    
-        <div className={`quiz-config-card ${isAnimating ? "fade-out" : ""}`}>
-          <div className="card-header">
-            <span className="material-symbols-rounded header-icon horror-shake">
-              tune
-            </span>
-            <h1 className="config-title">Configure Realm</h1>
-            <p className="config-subtitle">Set the parameters for your battle.</p>
-          </div>
+        <form className="quiz-config-card quiz-form" onSubmit={handleSubmit}>
+          <h1>Create Quiz Lobby</h1>
 
-          <form onSubmit={handleSubmit} className="quiz-form">
-         
-            <div className="form-group">
-              <label>Topic / Realm</label>
-              <div className="input-wrapper">
-                <span className="material-symbols-rounded input-icon">category</span>
-                <input
-                  type="text"
-                  name="topic"
-                  placeholder="e.g. Space, Horror, History..."
-                  value={formData.topic}
-                  onChange={handleChange}
-                  required
-                  autoComplete="off"
-                />
-              </div>
-            </div>
+          <input
+            value={formData.playerName}
+            onChange={(e) => handleInput("playerName", e.target.value)}
+            onClick={() => play2Sec(clickSound)}
+            placeholder="Your Name"
+            required
+          />
 
-            <div className="row-group">
-            
-              <div className="form-group">
-                <label>Time per Question</label>
-                <div className="input-wrapper">
-                  <span className="material-symbols-rounded input-icon">timer</span>
-                  <select
-                    name="timePerQuestion"
-                    value={formData.timePerQuestion}
-                    onChange={handleChange}
-                  >
-                    <option value="10">10 Seconds</option>
-                    <option value="15">15 Seconds</option>
-                    <option value="20">20 Seconds</option>
-                    <option value="30">30 Seconds</option>
-                  </select>
-                </div>
-              </div>
+          <label>Topic</label>
+          <select
+            value={formData.topic}
+            onChange={(e) => handleInput("topic", e.target.value)}
+            onClick={() => play2Sec(clickSound)}
+            required
+          >
+            <option value="">Select Topic</option>
+            {topics.map((t) => (
+              <option key={t}>{t}</option>
+            ))}
+          </select>
 
-          
-              <div className="form-group">
-                <label>No. of Questions</label>
-                <div className="input-wrapper">
-                  <span className="material-symbols-rounded input-icon">format_list_numbered</span>
-                  <select
-                    name="numQuestions"
-                    value={formData.numQuestions}
-                    onChange={handleChange}
-                  >
-                    <option value="5">5 Questions</option>
-                    <option value="10">10 Questions</option>
-                    <option value="15">15 Questions</option>
-                    <option value="20">20 Questions</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+          <label>Time per Question</label>
+          <select
+            value={formData.timePerQuestion}
+            onChange={(e) => handleInput("timePerQuestion", e.target.value)}
+            onClick={() => play2Sec(clickSound)}
+          >
+            <option value="10">10s</option>
+            <option value="15">15s</option>
+            <option value="20">20s</option>
+          </select>
 
-            <button type="submit" className="generate-btn" disabled={isAnimating}>
-              {isAnimating ? "Summoning Lobby..." : "Create Lobby"}
-            </button>
-          </form>
-        </div>
+          <label>No. of Questions</label>
+          <select
+            value={formData.numQuestions}
+            onChange={(e) => handleInput("numQuestions", e.target.value)}
+            onClick={() => play2Sec(clickSound)}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+
+          <button
+            type="submit"
+            onClick={() => play2Sec(clickSound)}
+          >
+            Create Lobby
+          </button>
+        </form>
       ) : (
-      
-        <div className="lobby-code-card horror-hover">
-          <div className="card-header">
-            <span className="material-symbols-rounded header-icon success-icon">
-              check_circle
-            </span>
-            <h1 className="config-title">Lobby Created</h1>
-            <p className="config-subtitle">Share this code with your rivals.</p>
-          </div>
+        <div className="lobby-code-card">
+          <h2>Your Lobby Code</h2>
+          <h1 className="lobby-code-display">
+            {lobbyCode.split("").map((digit, index) => (
+              <span key={index} className="code-digit">{digit}</span>
+            ))}
+          </h1>
+          <p>Press ANY key to START the quiz…</p>
 
-          <div className="code-display-wrapper">
-            <div className="code-box">
-              {lobbyCode.toString().split("").map((digit, index) => (
-                <span key={index} className="code-digit" style={{animationDelay: `${index * 0.1}s`}}>
-                  {digit}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="instruction-text">
-            <span className="blink-text">Press <strong>ENTER</strong> to join</span>
-          </div>
-          
-          <div className="lobby-details-preview">
-            <span>{formData.topic || "Random"}</span> • <span>{formData.numQuestions} Qs</span> • <span>{formData.timePerQuestion}s</span>
-          </div>
+          <h3>Players:</h3>
+          <ul>
+            {players.map((p, i) => (
+              <li key={i}>{p.name}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
